@@ -100,27 +100,10 @@
     - Use GitHub account for synching
   - **DO NOT** install any other extension on VS Code
     - In case you need something, talk to the team
-
-- Wireshark
-  - `sudo add-apt-repository universe`
-  - `sudo apt install wireshark`
-  - Hit `Yes`
-  - `sudo dpkg-reconfigure wireshark-common`
-  - `sudo chmod +x /usr/bin/dumpcap`
-  - Add this to `~/.bashrc`
-  - `export SSLKEYLOGFILE=~/.ssl-key.log`
-  - `touch ~/.ssl-key.log`
-- Docker
-  - Login
-    - `docker login`
-  - In case of permission denied
-    - test with `sudo` and make sure it works
-    - if it works, run these commands
-      - `sudo gpasswd -a $USER docker`
-      - `newgrp docker`
-      - `sudo groupadd docker`
-      - `sudo usermod -aG docker ${USER}`
-      - `sudo usermod -aG docker $USER`
+  - Word wrap
+    - Files => Preferences => Settings
+    - Search for “word wrap”
+    - Select “on” from the dropdown
 
 - Configuration
   - Add these to favorites, in order
@@ -129,21 +112,16 @@
     - VS Code
     - Terminal
     - Editor
+
 - Chrome
   - Make default
     - On the first run, it asks for it
   - Do not send crash reports
   - Sign in
   - Extensions
-    - JSONView
-    - Grammarly
+    - JSONViewer
     - React Developer Tools
-- VS Code
-  - Turn on sync (using GitHub)
-  - Word wrap
-    - Files => Preferences => Settings
-    - Search for “word wrap”
-    - Select “on” from the dropdown
+
 - Root
   - `sudo mkdir -p /root/.ssh`
   - `sudo ln -f -s ~/.ssh/id_ed25519 /root/.ssh/id_ed25519`
@@ -151,9 +129,6 @@
   - `sudo ln -f -s ~/.ssh/known_hosts /root/.ssh/known_hosts`
 
 * Development
-  - For each company (top-level URL path segment in GitHub for example), create a directory in / (root). For example,  
-    `mkdir /HolismHolding`.
-    - Make sure the name maps the URL segment or the company name
-  - Give that folder full permission so that all applications would work without bothering your development with `sudo` stuff:  
-    `sudo chmod -R 777 /HolismHolding`
-  - Only [use SSH to connect to GitHub](https://www.freecodecamp.org/news/how-to-fix-git-always-asking-for-user-credentials/).
+  - Clone PaydarCore
+  - Clone PaydarNode
+  - Enjoy!
