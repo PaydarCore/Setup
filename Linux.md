@@ -58,6 +58,19 @@
 
 ---
 
+- Install VPN and connect to it (in case of doubt, ASK)
+- Update Ubuntu (using VPN)
+  - Settings
+  - Software Update
+
+- Install software using script
+  - `sudo mkdir /Temp`
+  - `sudo chmod 777 /Temp`
+  - `cd /Temp`
+  - `wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Linux.sh`
+  - `sudo chmod 777 Linux.sh`
+  - `sudo ./Linux.sh`
+
 - Git 
   - Generate keys and add your public key to GitHub 
     - Open terminal 
@@ -67,6 +80,7 @@
       - Empty password 
       - Empty password, again 
     - GitHub 
+      - Profile menu
       - Settings 
       - SSH and GPG keys 
       - New SSH Key 
@@ -80,26 +94,12 @@
   - Introduce yourself to git 
     - `git config --global user.email "your-email-of-github-here"` 
     - `git config --global user.name "your name here"`
-  - Login into GitHub Container Registry
-    - `docker login ghcr.io`
-    - username
-    - package reading personal access token
 
-- Install VPN and connect to it (in case of doubt, ASK)
-- Update Ubuntu (using VPN)
-  - Settings
-  - Software Update
-- Install software using script
-  - `sudo mkdir /Temp`
-  - `sudo chmod 777 /Temp`
-  - `cd /Temp`
-  - `wget https://raw.githubusercontent.com/HolismHolding/Infra/main/Setup/DevelopmentEnvironment.sh`
-  - `sudo chmod 777 DevelopmentEnvironment.sh`
-  - `sudo ./DevelopmentEnvironment.sh`
-
-- **DO NOT** install any other extension on VS Code
-  - In case you need something, talk to the team
-
+- VS Code
+  - Turn on Settings Sync...
+    - Use GitHub account for synching
+  - **DO NOT** install any other extension on VS Code
+    - In case you need something, talk to the team
 
 - Wireshark
   - `sudo add-apt-repository universe`

@@ -36,7 +36,8 @@ function InstallVsCode()
     sudo apt update
     sudo apt install code -y
 
-    code --install-extension ms-vscode-remote.remote-containers
+    code --install-extension ms-dotnettools.csharp
+    code --install-extension bradlc.vscode-tailwindcss
 
     Write "Installed VS Code"
 }
@@ -92,6 +93,17 @@ function InstallDockerCompose()
     docker-compose --version
 
     Write "Installed Docker Compose"
+}
+
+function InstallDotNet()
+{
+    Write "Installing .NET ..."
+
+    wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    sudo dpkg -i packages-microsoft-prod.deb
+    rm packages-microsoft-prod.deb
+
+    Write "Installed .NET"
 }
 
 function InstallAnydesk()
@@ -204,17 +216,6 @@ function SetDockerPermissions()
     sudo usermod -aG docker $USER
     
     Write "Set docker permissions"
-}
-
-function DownloadVsCodeExtensions()
-{
-    Write "Downloading VS Code extensions ... "
-
-    sudo mkdir -p /PaydarHolding/Extensions
-    wget https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-dotnettools/vsextensions/csharp/1.25.0/vspackage?targetPlatform=linux-x64
-    mv 'vspackage?targetPlatform=linux-x64' /PaydarHolding/Extensions/CSharp.vsix
-
-    Write "Downloaded VS Code extensions "
 }
 
 Write "Paydar Holding Installation"
