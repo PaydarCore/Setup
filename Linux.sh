@@ -226,7 +226,7 @@ function RegisterPaydarCommands()
     Write "Registering Paydar Commands ..."
 
     sudo chmod 777 /etc/bash.bashrc
-    sudo echo 'PATH="${PATH}:/PaydarHolding/Infra/Commands"' >> /etc/bash.bashrc
+    sudo echo 'PATH="${PATH}:/PaydarCore/Infra/Commands"' >> /etc/bash.bashrc
 
     Write "Registered Paydar Commands"
 }
