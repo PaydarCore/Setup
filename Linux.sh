@@ -106,6 +106,18 @@ function InstallDotNet()
     Write "Installed .NET"
 }
 
+function InstallAzureDataStudio()
+{
+    Write "Installing Azure Data Studio ..."
+
+    wget https://go.microsoft.com/fwlink/?linkid=2202429
+    mv index.html\?linkid\=2202429 ads.deb
+    sudo apt install ./ads.deb -y
+    # If not connecting => [update OpenSSL](https://github.com/microsoft/azuredatastudio/issues/13457#issuecomment-832202549)
+
+    Write "Installed Azure Data Studio"
+}
+
 function InstallAnydesk()
 {
     Write "Installing AnyDesk ..."
@@ -228,7 +240,7 @@ InstallDockerCompose
 # InstallDotNet
 # InstallNode
 # InstallSqlServer
-# InstallAzureDataStudio
+InstallAzureDataStudio
 InstallAnydesk
 InstallNginx
 InstallMkcert
