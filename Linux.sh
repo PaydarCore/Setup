@@ -103,7 +103,29 @@ function InstallDotNet()
     sudo dpkg -i packages-microsoft-prod.deb
     rm packages-microsoft-prod.deb
 
+    sudo apt-get update 
+    sudo apt-get install -y dotnet-sdk-6.0
+
     Write "Installed .NET"
+}
+
+function InstallNode()
+{
+    Write "Installing Node ..."
+
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+    sudo apt install nodejs -y
+
+    Write "Installed Node"
+}
+
+function InstallSqlServer()
+{
+    Write "Installing SQL Server ..."
+
+    # 22.04 is not supported yet. use Docker
+
+    Write "Installed SQL Server"
 }
 
 function InstallAzureDataStudio()
@@ -237,9 +259,9 @@ InstallVsCode
 InstallGit
 InstallDocker
 InstallDockerCompose
-# InstallDotNet
-# InstallNode
-# InstallSqlServer
+InstallDotNet
+InstallNode
+InstallSqlServer
 InstallAzureDataStudio
 InstallAnydesk
 InstallNginx
