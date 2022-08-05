@@ -379,10 +379,10 @@ InstallVsCode
 InstallGit
 InstallDocker
 InstallDockerCompose
-InstallDotNet
-InstallNode
-InstallSqlServer
-InstallAzureDataStudio
+# InstallDotNet
+# InstallNode
+# InstallSqlServer
+# InstallAzureDataStudio
 InstallAnydesk
 InstallNginx
 InstallMkcert
@@ -391,12 +391,10 @@ InstallTelnet
 InstallBeyondCompare
 InstallJq
 InstallRename
-InstallWireshark
-DownloadVsCodeExtensions
 RegisterPaydarCommands
 
 Divide
 
-Write "IMPORTANT => RESTART YOUR SYSTEM"
+Warning "IMPORTANT => RESTART YOUR SYSTEM"
 SetDockerPermissions
 Divide
