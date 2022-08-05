@@ -147,7 +147,12 @@ function InstallDockerCompose()
 
 function InstallDotNet()
 {
-    Write "Installing .NET ..."
+    if ( which dotnet 1>/dev/null ); then
+        Success "dotnet;$Check"
+        return
+    fi
+
+    Info "Installing .NET ..."
 
     wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
     sudo dpkg -i packages-microsoft-prod.deb
@@ -156,17 +161,22 @@ function InstallDotNet()
     sudo apt-get update 
     sudo apt-get install -y dotnet-sdk-6.0
 
-    Write "Installed .NET"
+    Success "Installed .NET"
 }
 
 function InstallNode()
 {
-    Write "Installing Node ..."
+    if ( which node 1>/dev/null ); then
+        Success "Node.js;$Check"
+        return
+    fi
+
+    Info "Installing Node ..."
 
     curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
     sudo apt install nodejs -y
 
-    Write "Installed Node"
+    Success "Installed Node"
 }
 
 function InstallSqlServer()
@@ -180,14 +190,19 @@ function InstallSqlServer()
 
 function InstallAzureDataStudio()
 {
-    Write "Installing Azure Data Studio ..."
+    if ( which azuredatastudio 1>/dev/null ); then
+        Success "Azure Data Studio;$Check"
+        return
+    fi
+
+    Info "Installing Azure Data Studio ..."
 
     wget https://go.microsoft.com/fwlink/?linkid=2202429
     mv index.html\?linkid\=2202429 ads.deb
     sudo apt install ./ads.deb -y
     # If not connecting => [update OpenSSL](https://github.com/microsoft/azuredatastudio/issues/13457#issuecomment-832202549)
 
-    Write "Installed Azure Data Studio"
+    Success "Installed Azure Data Studio"
 }
 
 function InstallAnydesk()
@@ -379,10 +394,10 @@ InstallVsCode
 InstallGit
 InstallDocker
 InstallDockerCompose
-# InstallDotNet
-# InstallNode
+InstallDotNet
+InstallNode
 # InstallSqlServer
-# InstallAzureDataStudio
+InstallAzureDataStudio
 InstallAnydesk
 InstallNginx
 InstallMkcert
