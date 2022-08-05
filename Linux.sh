@@ -179,6 +179,20 @@ function InstallNode()
     Success "Installed Node"
 }
 
+function InstallNpm()
+{
+    if ( which npm 1>/dev/null ); then
+        Success "NPM;$Check"
+        return
+    fi
+
+    Info "Installing NPM ..."
+
+    sudo apt install npm -y
+
+    Success "Installed NPM"
+}
+
 function InstallSqlServer()
 {
     Write "Installing SQL Server ..."
@@ -396,6 +410,7 @@ InstallDocker
 InstallDockerCompose
 InstallDotNet
 InstallNode
+InstallNpm
 # InstallSqlServer
 InstallAzureDataStudio
 InstallAnydesk
