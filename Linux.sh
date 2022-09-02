@@ -36,6 +36,36 @@ function Divide()
     echo ""
 }
 
+function InstallVpn()
+{
+    if ( which openconnect 1>/dev/null ); then
+        Success "OpenConnect;$Check"
+    else
+        Info "Installing openconnect ..."
+
+        sudo apt install openconnect
+
+        Success "Installed openconnect"
+    fi
+
+    if [ ! -f /Vpn ]; then
+        Divide
+        Info Please enter your VPN username
+        Divide
+        read Username
+        Divide
+        Info Please enter your VPN password
+        Divide
+        read Password
+        Divide
+        Info Please give me the VPN server address
+        Divide
+        read Server
+        echo "printf '$Username\n$Password' | sudo openconnect $Server" | sudo tee -a /Vpn > /dev/null
+        sudo chmod 777 /Vpn
+    fi
+}
+
 function InstallChrome()
 {
     if ( which google-chrome 1>/dev/null ); then
@@ -47,8 +77,8 @@ function InstallChrome()
 
     sudo apt-get update 
     #sudo apt upgrade
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo dpkg -i google-chrome-stable_current_amd64.deb
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O chrome
+    sudo dpkg -i chrome
 
     Success "Installed Google Chrome"
 }
@@ -261,8 +291,8 @@ function InstallMkcert()
     Info "Installing Mkcert ..."
 
     sudo apt install libnss3-tools
-    wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
-    sudo cp mkcert-v1.4.3-linux-amd64 /usr/local/bin/mkcert
+    wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O mkcert
+    sudo cp mkcert /usr/local/bin/mkcert
     sudo chmod +x /usr/local/bin/mkcert
     mkcert -install
 
@@ -281,10 +311,6 @@ function InstallMicro()
     sudo chmod -R 777 /usr/local/bin
     cd /usr/local/bin
     sudo curl https://getmic.ro | bash
-
-    # or
-    # wget https://github.com/zyedidia/micro/releases/download/v2.0.10/micro-2.0.10-amd64.deb
-    # sudo apt install ./micro-2.0.10-amd64.deb
 
     Success "Installed Micro"
 }
@@ -312,12 +338,28 @@ function InstallBeyondCompare()
 
     Info "Installing Beyond Compare ..."
 
-    wget https://www.scootersoftware.com/bcompare-4.4.2.26348_amd64.deb
+    wget https://www.scootersoftware.com/bcompare-4.4.2.26348_amd64.deb -O beyondCompare
     sudo apt-get update
     sudo apt-get install gdebi-core -y
-    sudo gdebi -n bcompare-4.4.2.26348_amd64.deb
+    sudo gdebi -n beyondCompare
 
     Success "Installed Beyond Compare"
+}
+
+function InstallWireshark()
+{
+    if ( which wireshark 1>/dev/null ); then
+        Success "Wireshark;$Check"
+        return;
+    fi
+
+    Info "Installing Wireshark ..."
+
+    sudo apt-get install wireshark -y
+    sudo dpkg-reconfigure wireshark-common
+    sudo usermod -aG wireshark $USER
+
+    Success "Installed Wireshark"
 }
 
 function InstallJq()
@@ -378,14 +420,6 @@ function RegisterPaydarCommands()
     Success "Registered Paydar Commands"
 }
 
-function InstallVpn()
-{
-    Info "Creating VPN ..."
-    # sudo apt install openconnect
-    # micro /Vpn
-    # printf 'username\npassword' | sudo openconnect vpn-server-address
-}
-
 function SetDockerPermissions()
 {
     Info "Setting docker permissions ... "
@@ -399,10 +433,117 @@ function SetDockerPermissions()
     Success "Set docker permissions"
 }
 
+function DownloadVsCodeExtensions()
+{
+    if [ -f /PaydarCore/Extensions/CSharp.vsix ]; then
+        Success "CSharp extension;$Check"
+    else
+
+        Info "Downloading C# VS Code extension ... "
+
+        sudo mkdir -p /PaydarCore/Extensions
+
+        wget https://holism.blob.core.windows.net/downloads/csharp.vsix -O CSharp.vsix
+        sudo mv CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
+
+        Success "Downloaded C# VS Code extension "
+
+    fi
+
+    if [ -f /PaydarCore/Extensions/Python.vsix ]; then
+        Success "Python extension;$Check"
+    else
+
+        Info "Downloading Python VS Code extension ... "
+
+        sudo mkdir -p /PaydarCore/Extensions
+
+        wget https://holism.blob.core.windows.net/downloads/python.vsix -O Python.vsix
+        sudo mv Python.vsix /PaydarCore/Extensions/Python.vsix
+
+        Success "Downloaded Python VS Code extension "
+
+    fi
+}
+
+function GiveAccessToRoot()
+{
+    sudo mkdir -p /root/.ssh
+    sudo ln -f -s ~/.ssh/id_ed25519 /root/.ssh/id_ed25519
+    sudo ln -f -s ~/.ssh/id_ed25519.pub /root/.ssh/id_ed25519.pub
+    sudo ln -f -s ~/.ssh/known_hosts /root/.ssh/known_hosts
+}
+
+function ConfigureKeyboard()
+{
+    Info "Configring keyboard ..."
+
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 40
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 250
+
+    Success "Configured the keyboard"
+}
+
+function SetFavoriteApps()
+{
+    gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'code.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.gedit.desktop']"
+}
+
+function SetAppsToOpenMaximized()
+{
+    # https://ncona.com/2019/11/configuring-gnome-terminal-programmatically/
+    # terminal + VS Code + Chrome + Text Editor + System Monitor + Anydesk + Beyond Compare + ...
+
+    # VS Code => ~/.config/Code/User/settings.json
+    Info "Setting terminal to be opened maximized"
+}
+
+function CloneInfra()
+{
+    if [ ! -d /PaydarCore ]; then
+        Clone PaydarCore
+    fi
+    if [ ! -d /PaydarNode ]; then
+        Clone PaydarNode
+    fi
+}
+
+function PullImages()
+{
+    if ( docker image ls | grep dotnet 1>/dev/null ); then
+        Success "paydar/dotnet;$Check"
+    else
+        Info "Getting paydar/dotnet"
+        docker pull paydar/dotnet
+    fi
+    if ( docker image ls | grep react 1>/dev/null ); then
+        Success "paydar/react;$Check"
+    else
+        Info "Getting paydar/react"
+        docker pull paydar/react
+    fi
+    if ( docker image ls | grep sql 1>/dev/null ); then
+        Success "paydar/sql;$Check"
+    else
+        Info "Getting paydar/sql"
+        docker pull paydar/sql
+    fi
+    if ( docker image ls | grep next 1>/dev/null ); then
+        Success "paydar/next;$Check"
+    else
+        Info "Getting paydar/next"
+        docker pull paydar/next
+    fi
+}
+
+sudo echo ""
+cd /Temp
+
 Divide
 Info "Paydar Holding Installation"
 Divide
 
+InstallVpn
 InstallChrome
 InstallVsCode
 InstallGit
@@ -421,7 +562,17 @@ InstallTelnet
 InstallBeyondCompare
 InstallJq
 InstallRename
-RegisterPaydarCommands
+InstallWireshark
+DownloadVsCodeExtensions
+RegisterHolismCommands
+
+GiveAccessToRoot
+ConfigureKeyboard
+SetFavoriteApps
+SetAppsToOpenMaximized
+
+CloneInfra
+PullImages
 
 Divide
 
