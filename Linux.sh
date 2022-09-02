@@ -412,9 +412,13 @@ function RegisterPaydarCommands()
     cd /PaydarCore
     if [ ! -d /PaydarCore/Commands ]; then
         git clone https://github.com/PaydarCore/Commands
+    else
+        git -C /PaydarCore/Commands pull
     fi
     if [ ! -d /PaydarCore/Scripts ]; then
         git clone https://github.com/PaydarCore/Scripts
+    else
+        git -C /PaydarCore/Scripts pull
     fi
     cd /Temp
     
