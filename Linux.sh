@@ -43,7 +43,7 @@ function InstallVpn()
     else
         Info "Installing openconnect ..."
 
-        sudo apt install openconnect
+        sudo apt install openconnect -y
 
         Success "Installed openconnect"
     fi
@@ -588,7 +588,7 @@ InstallBeyondCompare
 InstallJq
 InstallRename
 InstallWireshark
-DownloadVsCodeExtensions
+# DownloadVsCodeExtensions
 RegisterPaydarCommands
 
 GiveAccessToRoot
