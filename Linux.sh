@@ -410,7 +410,12 @@ function RegisterPaydarCommands()
     sudo mkdir -p /PaydarCore/Commands
     sudo chmod -R 777 /PaydarCore/Commands
     cd /PaydarCore
-    git clone https://github.com/PaydarCore/Commands
+    if [ ! -d /PaydarCore/Commands ]; then
+        git clone https://github.com/PaydarCore/Commands
+    fi
+    if [ ! -d /PaydarCore/Scripts ]; then
+        git clone https://github.com/PaydarCore/Scripts
+    fi
     cd /Temp
     
     if ( grep -nr PaydarCore /etc/bash.bashrc 1>/dev/null ); then
