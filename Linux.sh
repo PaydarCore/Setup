@@ -483,7 +483,7 @@ function ConfigureKeyboard()
     fi
 
     Info "Configring keyboard ..."
-    
+
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 40
     gsettings set org.gnome.desktop.peripherals.keyboard delay 250
 
@@ -570,7 +570,7 @@ InstallJq
 InstallRename
 InstallWireshark
 DownloadVsCodeExtensions
-RegisterHolismCommands
+RegisterPaydarCommands
 
 GiveAccessToRoot
 ConfigureKeyboard
