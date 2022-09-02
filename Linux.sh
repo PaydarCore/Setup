@@ -407,6 +407,12 @@ function InstallBaobab()
 
 function RegisterPaydarCommands()
 {
+    sudo mkdir -p /PaydarCore/Commands
+    sudo chmod -R 777 /PaydarCore/Commands
+    cd /PaydarCore
+    git clone https://github.com/PaydarCore/Commands
+    cd /Temp
+    
     if ( grep -nr PaydarCore /etc/bash.bashrc 1>/dev/null ); then
         Success "Paydar commands;$Check"
         return;
