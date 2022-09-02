@@ -476,8 +476,14 @@ function GiveAccessToRoot()
 
 function ConfigureKeyboard()
 {
-    Info "Configring keyboard ..."
+    if ( which dbus-x11 1>/dev/null ); then
+        Success "dbus-x11 extension;$Check"
+    else
+        sudo apt install dbus-x11
+    fi
 
+    Info "Configring keyboard ..."
+    
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 40
     gsettings set org.gnome.desktop.peripherals.keyboard delay 250
 
