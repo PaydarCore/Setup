@@ -423,6 +423,8 @@ function RegisterPaydarCommands()
         git -C /PaydarCore/Scripts pull
     fi
     cd /Temp
+
+    sudo chmod -R 777 /PaydarCore/Commands
     
     if ( grep -nr PaydarCore /etc/bash.bashrc 1>/dev/null ); then
         Success "Paydar commands;$Check"
