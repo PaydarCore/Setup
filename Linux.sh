@@ -412,15 +412,15 @@ function RegisterPaydarCommands()
     cd /PaydarCore
     if [ ! -d /PaydarCore/Commands ]; then
         git clone https://github.com/PaydarCore/Commands
-    else
-        git -C /PaydarCore/Commands reset --hard && git -C /PaydarCore/Commands clean -fxd
-        git -C /PaydarCore/Commands pull
+    # else
+    #     git -C /PaydarCore/Commands reset --hard && git -C /PaydarCore/Commands clean -fxd
+    #     git -C /PaydarCore/Commands pull
     fi
     if [ ! -d /PaydarCore/Scripts ]; then
         git clone https://github.com/PaydarCore/Scripts
-    else
-        git -C /PaydarCore/Scripts reset --hard && git -C /PaydarCore/Scripts clean -fxd
-        git -C /PaydarCore/Scripts pull
+    # else
+    #     git -C /PaydarCore/Scripts reset --hard && git -C /PaydarCore/Scripts clean -fxd
+    #     git -C /PaydarCore/Scripts pull
     fi
     cd /Temp
 
@@ -462,27 +462,27 @@ function DownloadVsCodeExtensions()
 
         sudo mkdir -p /PaydarCore/Extensions
 
-        wget https://holism.blob.core.windows.net/downloads/csharp.vsix -O CSharp.vsix
+        wget https://storage.paydarsamane.com/files/vsCodeExtensions/csharp.zip -O CSharp.vsix
         sudo mv CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
 
         Success "Downloaded C# VS Code extension "
 
     fi
 
-    if [ -f /PaydarCore/Extensions/Python.vsix ]; then
-        Success "Python extension;$Check"
-    else
+    # if [ -f /PaydarCore/Extensions/Python.vsix ]; then
+    #     Success "Python extension;$Check"
+    # else
 
-        Info "Downloading Python VS Code extension ... "
+    #     Info "Downloading Python VS Code extension ... "
 
-        sudo mkdir -p /PaydarCore/Extensions
+    #     sudo mkdir -p /PaydarCore/Extensions
 
-        wget https://holism.blob.core.windows.net/downloads/python.vsix -O Python.vsix
-        sudo mv Python.vsix /PaydarCore/Extensions/Python.vsix
+    #     wget https://holism.blob.core.windows.net/downloads/python.vsix -O Python.vsix
+    #     sudo mv Python.vsix /PaydarCore/Extensions/Python.vsix
 
-        Success "Downloaded Python VS Code extension "
+    #     Success "Downloaded Python VS Code extension "
 
-    fi
+    # fi
 }
 
 function GiveAccessToRoot()
@@ -588,7 +588,7 @@ InstallBeyondCompare
 InstallJq
 InstallRename
 InstallWireshark
-# DownloadVsCodeExtensions
+DownloadVsCodeExtensions
 RegisterPaydarCommands
 
 GiveAccessToRoot
@@ -596,7 +596,7 @@ ConfigureKeyboard
 SetFavoriteApps
 SetAppsToOpenMaximized
 
-CloneInfra
+# CloneInfra
 PullImages
 
 Divide
