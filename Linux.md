@@ -94,6 +94,16 @@
   - Introduce yourself to git 
     - `git config --global user.email "your-email-of-github-here"` 
     - `git config --global user.name "your name here"`
+  - Add your PAT token to /LocalSecrets/GitHubAccessToken
+    - Go to github.com
+    - Profile
+    - Settings
+    - Developer settings
+    - Personal access tokens
+    - Generate new token
+    - Name => RepositoryCloningToken
+    - Expiration => No expiration
+    - Scope => repo (full)
 
 - VS Code
   - Turn on Settings Sync...

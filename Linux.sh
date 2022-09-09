@@ -523,6 +523,28 @@ function SetAppsToOpenMaximized()
     Info "Setting terminal to be opened maximized"
 }
 
+function CreateGitHubAccessTokenFile()
+{
+    if [ -f /LocalSecrets/GitHubAccessToken ]; then
+        Success "GitHubAccesstoken;$Check"
+    else
+        if [ ! -d /LocalSecrets ]; then
+            sudo mkdir -p /LocalSecrets
+            sudo chmod 777 /LocalSecrets
+        fi
+        sudo touch /LocalSecrets/GitHubAccessToken
+        sudo chmod 777 /LocalSecrets/GitHubAccessToken
+    fi
+}
+
+function CreateGitGlobalConfig()
+{
+    if [ ! -f ~/.gitconfig ]; then
+        sudo touch ~/.gitconfig
+        sudo chmod 777 ~/.gitconfig
+    fi
+}
+
 function CloneInfra()
 {
     if [ ! -d /PaydarCore ]; then
@@ -595,6 +617,8 @@ GiveAccessToRoot
 ConfigureKeyboard
 SetFavoriteApps
 SetAppsToOpenMaximized
+CreateGitHubAccessTokenFile
+CreateGitGlobalConfig
 
 # CloneInfra
 PullImages
