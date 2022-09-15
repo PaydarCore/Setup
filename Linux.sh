@@ -523,28 +523,28 @@ function SetAppsToOpenMaximized()
 
     # VS Code => ~/.config/Code/User/settings.json
     
-    if [ ! -f ~/MaximizeNew.py ]; then
+    if [ ! -f ~/.config/AppsToOpenMaximized.py ]; then
         Info "Setting apps to be opened maximized..."
     fi
 
-    rm -rf ~/MaximizeNew.py
-    echo '#!/usr/bin/env python3' > ~/MaximizeNew.py
-    echo 'import gi' >> ~/MaximizeNew.py
-    echo "gi.require_version('Wnck', '3.0')" >> ~/MaximizeNew.py
-    echo 'from gi.repository import Wnck' >> ~/MaximizeNew.py
-    echo 'import sys' >> ~/MaximizeNew.py
-    echo '' >> ~/MaximizeNew.py
-    echo 'subjects = ["gnome-terminal-server", "Gnome-terminal", "Code", "code"m "gedit", "Gedit", "bcompare", "Bcompare", "gnome-system-monitor", "Gnome-system-monitor", "google-chrome", "Google-chrome", "anydesk", "Anydesk"]' >> ~/MaximizeNew.py
-    echo '' >> ~/MaximizeNew.py
-    echo 'wnck_scr = Wnck.Screen.get_default()' >> ~/MaximizeNew.py
-    echo 'wnck_scr.force_update()' >> ~/MaximizeNew.py
-    echo 'wlist = wnck_scr.get_windows()' >> ~/MaximizeNew.py
-    echo 'for w in wlist:' >> ~/MaximizeNew.py
-    echo '    if all([' >> ~/MaximizeNew.py
-    echo '        w.get_class_group_name() in subjects,' >> ~/MaximizeNew.py
-    echo '        w.get_xid() == (int(sys.argv[1]))' >> ~/MaximizeNew.py
-    echo '    ]):' >> ~/MaximizeNew.py
-    echo '        w.maximize()' >> ~/MaximizeNew.py
+    rm -rf ~/.config/AppsToOpenMaximized.py
+    echo '#!/usr/bin/env python3' > ~/.config/AppsToOpenMaximized.py
+    echo 'import gi' >> ~/.config/AppsToOpenMaximized.py
+    echo "gi.require_version('Wnck', '3.0')" >> ~/.config/AppsToOpenMaximized.py
+    echo 'from gi.repository import Wnck' >> ~/.config/AppsToOpenMaximized.py
+    echo 'import sys' >> ~/.config/AppsToOpenMaximized.py
+    echo '' >> ~/.config/AppsToOpenMaximized.py
+    echo 'subjects = ["gnome-terminal-server", "Gnome-terminal", "Code", "code", "gedit", "Gedit", "bcompare", "Bcompare", "gnome-system-monitor", "Gnome-system-monitor", "google-chrome", "Google-chrome", "anydesk", "Anydesk"]' >> ~/.config/AppsToOpenMaximized.py
+    echo '' >> ~/.config/AppsToOpenMaximized.py
+    echo 'wnck_scr = Wnck.Screen.get_default()' >> ~/.config/AppsToOpenMaximized.py
+    echo 'wnck_scr.force_update()' >> ~/.config/AppsToOpenMaximized.py
+    echo 'wlist = wnck_scr.get_windows()' >> ~/.config/AppsToOpenMaximized.py
+    echo 'for w in wlist:' >> ~/.config/AppsToOpenMaximized.py
+    echo '    if all([' >> ~/.config/AppsToOpenMaximized.py
+    echo '        w.get_class_group_name() in subjects,' >> ~/.config/AppsToOpenMaximized.py
+    echo '        w.get_xid() == (int(sys.argv[1]))' >> ~/.config/AppsToOpenMaximized.py
+    echo '    ]):' >> ~/.config/AppsToOpenMaximized.py
+    echo '        w.maximize()' >> ~/.config/AppsToOpenMaximized.py
     
     if ( ! whereis dbus-x11 1>/dev/null ); then
         Info "Installing budgie-window-shuffler ..."
@@ -552,8 +552,8 @@ function SetAppsToOpenMaximized()
         Success "Installed budgie-window-shuffler"
     fi
     
-    sudo chmod 777 ~/MaximizeNew.py
-    gsettings set org.ubuntubudgie.windowshuffler newwindowaction ~/MaximizeNew.py
+    sudo chmod 777 ~/.config/AppsToOpenMaximized.py
+    gsettings set org.ubuntubudgie.windowshuffler newwindowaction ~/.config/AppsToOpenMaximized.py
 
     Success "AppsToOpenMaximized;$Check"
 }
