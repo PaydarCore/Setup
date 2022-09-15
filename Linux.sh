@@ -264,6 +264,10 @@ function InstallAnydesk()
     sudo apt install anydesk -y
 
     Success "Installed AnyDesk"
+
+    sudo sed -i 's/#\s*WaylandEnable\s*=.*$/WaylandEnable=false/g' /etc/gdm3/custom.conf
+    sudo sed -i 's/#\s*AutomaticLoginEnable\s*=.*$/AutomaticLoginEnable=true/g' /etc/gdm3/custom.conf
+    sudo sed -i 's/#\s*AutomaticLogin\s*=.*$/AutomaticLogin=$USERNAME/g' /etc/gdm3/custom.conf
 }
 
 function InstallNginx()
