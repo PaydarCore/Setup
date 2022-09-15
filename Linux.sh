@@ -495,7 +495,7 @@ function GiveAccessToRoot()
 
 function ConfigureKeyboard()
 {
-    if ( which dbus-x11 1>/dev/null ); then
+    if ( whereis dbus-x11 1>/dev/null ); then
         Success "dbus-x11 extension;$Check"
     else
         sudo apt install dbus-x11
@@ -520,7 +520,35 @@ function SetAppsToOpenMaximized()
     # terminal + VS Code + Chrome + Text Editor + System Monitor + Anydesk + Beyond Compare + ...
 
     # VS Code => ~/.config/Code/User/settings.json
-    Info "Setting terminal to be opened maximized"
+    Info "Setting apps to be opened maximized"
+    
+    echo '#!/usr/bin/env python3' > /Temp/maximize_new.py
+    echo 'import gi' >> /Temp/maximize_new.py
+    echo "gi.require_version('Wnck', '3.0')" >> /Temp/maximize_new.py
+    echo 'from gi.repository import Wnck' >> /Temp/maximize_new.py
+    echo 'import sys' >> /Temp/maximize_new.py
+    echo '' >> /Temp/maximize_new.py
+    echo 'subjects = ["gnome-terminal-server", "Gnome-terminal", "Code", "code"]' >> /Temp/maximize_new.py
+    echo '' >> /Temp/maximize_new.py
+    echo 'wnck_scr = Wnck.Screen.get_default()' >> /Temp/maximize_new.py
+    echo 'wnck_scr.force_update()' >> /Temp/maximize_new.py
+    echo 'wlist = wnck_scr.get_windows()' >> /Temp/maximize_new.py
+    echo 'for w in wlist:' >> /Temp/maximize_new.py
+    echo '    if all([' >> /Temp/maximize_new.py
+    echo '        w.get_class_group_name() in subjects,' >> /Temp/maximize_new.py
+    echo '        w.get_xid() == (int(sys.argv[1]))' >> /Temp/maximize_new.py
+    echo '    ]):' >> /Temp/maximize_new.py
+    echo '        w.maximize()' >> /Temp/maximize_new.py
+    
+    if ( whereis dbus-x11 1>/dev/null ); then
+        Success "budgie-window-shuffler;$Check"
+    else
+        sudo apt-get -y install budgie-window-shuffler
+    fi
+    
+    sudo chmod 777 /Temp/maximize_new.py
+    gsettings set org.ubuntubudgie.windowshuffler newwindowaction /Temp/maximize_new.py
+
 }
 
 function CreateGitHubAccessTokenFile()
