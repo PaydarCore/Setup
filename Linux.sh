@@ -532,23 +532,25 @@ function SetAppsToOpenMaximized()
     fi
 
     rm -rf ~/.config/AppsToOpenMaximized.py
-    echo '#!/usr/bin/env python3' > ~/.config/AppsToOpenMaximized.py
-    echo 'import gi' >> ~/.config/AppsToOpenMaximized.py
-    echo "gi.require_version('Wnck', '3.0')" >> ~/.config/AppsToOpenMaximized.py
-    echo 'from gi.repository import Wnck' >> ~/.config/AppsToOpenMaximized.py
-    echo 'import sys' >> ~/.config/AppsToOpenMaximized.py
-    echo '' >> ~/.config/AppsToOpenMaximized.py
-    echo 'subjects = ["gnome-terminal-server", "Gnome-terminal", "Code", "code", "gedit", "Gedit", "bcompare", "Bcompare", "gnome-system-monitor", "Gnome-system-monitor", "google-chrome", "Google-chrome", "anydesk", "Anydesk"]' >> ~/.config/AppsToOpenMaximized.py
-    echo '' >> ~/.config/AppsToOpenMaximized.py
-    echo 'wnck_scr = Wnck.Screen.get_default()' >> ~/.config/AppsToOpenMaximized.py
-    echo 'wnck_scr.force_update()' >> ~/.config/AppsToOpenMaximized.py
-    echo 'wlist = wnck_scr.get_windows()' >> ~/.config/AppsToOpenMaximized.py
-    echo 'for w in wlist:' >> ~/.config/AppsToOpenMaximized.py
-    echo '    if all([' >> ~/.config/AppsToOpenMaximized.py
-    echo '        w.get_class_group_name() in subjects,' >> ~/.config/AppsToOpenMaximized.py
-    echo '        w.get_xid() == (int(sys.argv[1]))' >> ~/.config/AppsToOpenMaximized.py
-    echo '    ]):' >> ~/.config/AppsToOpenMaximized.py
-    echo '        w.maximize()' >> ~/.config/AppsToOpenMaximized.py
+    # echo '#!/usr/bin/env python3' > ~/.config/AppsToOpenMaximized.py
+    # echo 'import gi' >> ~/.config/AppsToOpenMaximized.py
+    # echo "gi.require_version('Wnck', '3.0')" >> ~/.config/AppsToOpenMaximized.py
+    # echo 'from gi.repository import Wnck' >> ~/.config/AppsToOpenMaximized.py
+    # echo 'import sys' >> ~/.config/AppsToOpenMaximized.py
+    # echo '' >> ~/.config/AppsToOpenMaximized.py
+    # echo 'subjects = ["gnome-terminal-server", "Gnome-terminal", "Code", "code", "gedit", "Gedit", "bcompare", "Bcompare", "gnome-system-monitor", "Gnome-system-monitor", "google-chrome", "Google-chrome", "anydesk", "Anydesk"]' >> ~/.config/AppsToOpenMaximized.py
+    # echo '' >> ~/.config/AppsToOpenMaximized.py
+    # echo 'wnck_scr = Wnck.Screen.get_default()' >> ~/.config/AppsToOpenMaximized.py
+    # echo 'wnck_scr.force_update()' >> ~/.config/AppsToOpenMaximized.py
+    # echo 'wlist = wnck_scr.get_windows()' >> ~/.config/AppsToOpenMaximized.py
+    # echo 'for w in wlist:' >> ~/.config/AppsToOpenMaximized.py
+    # echo '    if all([' >> ~/.config/AppsToOpenMaximized.py
+    # echo '        w.get_class_group_name() in subjects,' >> ~/.config/AppsToOpenMaximized.py
+    # echo '        w.get_xid() == (int(sys.argv[1]))' >> ~/.config/AppsToOpenMaximized.py
+    # echo '    ]):' >> ~/.config/AppsToOpenMaximized.py
+    # echo '        w.maximize()' >> ~/.config/AppsToOpenMaximized.py
+
+    wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Maximize.py -O ~/.config/AppsToOpenMaximized.py
     
     if ( ! whereis dbus-x11 1>/dev/null ); then
         Info "Installing budgie-window-shuffler ..."
