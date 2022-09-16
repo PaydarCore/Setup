@@ -131,6 +131,8 @@
   - Extensions
     - JSONViewer
     - React Developer Tools
+  - Add breakpoints
+    - xs, sm, md, lg, xl, xxl
 
 - Root
   - `sudo mkdir -p /root/.ssh`
