@@ -550,9 +550,9 @@ function SetAppsToOpenMaximized()
     # echo '    ]):' >> ~/.config/AppsToOpenMaximized.py
     # echo '        w.maximize()' >> ~/.config/AppsToOpenMaximized.py
 
-    wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Maximize.py -O ~/.config/AppsToOpenMaximized.py
+    wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Maximize.py -O ~/.config/AppsToOpenMaximized.py 2>/dev/null
     
-    if ( ! whereis dbus-x11 1>/dev/null ); then
+    if ( ! whereis budgie-window-shuffler 1>/dev/null ); then
         Info "Installing budgie-window-shuffler ..."
         sudo apt-get -y install budgie-window-shuffler
         Success "Installed budgie-window-shuffler"
