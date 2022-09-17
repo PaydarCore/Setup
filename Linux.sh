@@ -499,7 +499,7 @@ function GiveAccessToRoot()
 
 function ConfigureKeyboard()
 {
-    if ( ! whereis dbus-x11 1>/dev/null ); then
+    if ( ! which dbus-x11 1>/dev/null ); then
         Info "Installing dbus-x11 ..."
 
         sudo apt install dbus-x11
@@ -552,7 +552,7 @@ function SetAppsToOpenMaximized()
 
     wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Maximize.py -O ~/.config/AppsToOpenMaximized.py 2>/dev/null
     
-    if ( ! whereis budgie-window-shuffler 1>/dev/null ); then
+    if ( ! which budgie-window-shuffler 1>/dev/null ); then
         Info "Installing budgie-window-shuffler ..."
         sudo apt-get -y install budgie-window-shuffler
         Success "Installed budgie-window-shuffler"
