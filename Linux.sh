@@ -522,46 +522,28 @@ function SetFavoriteApps()
 
 function SetAppsToOpenMaximized()
 {
-    # https://ncona.com/2019/11/configuring-gnome-terminal-programmatically/
-    # terminal + VS Code + Chrome + Text Editor + System Monitor + Anydesk + Beyond Compare + ...
-
-    # VS Code => ~/.config/Code/User/settings.json
-    
-    if [ ! -f ~/.config/AppsToOpenMaximized.py ]; then
-        Info "Setting apps to be opened maximized..."
+    if ( which devilspie2 1>/dev/null ); then
+        Success "devilspie2;$Check"
+        return
     fi
 
-    rm -rf ~/.config/AppsToOpenMaximized.py
-    # echo '#!/usr/bin/env python3' > ~/.config/AppsToOpenMaximized.py
-    # echo 'import gi' >> ~/.config/AppsToOpenMaximized.py
-    # echo "gi.require_version('Wnck', '3.0')" >> ~/.config/AppsToOpenMaximized.py
-    # echo 'from gi.repository import Wnck' >> ~/.config/AppsToOpenMaximized.py
-    # echo 'import sys' >> ~/.config/AppsToOpenMaximized.py
-    # echo '' >> ~/.config/AppsToOpenMaximized.py
-    # echo 'subjects = ["gnome-terminal-server", "Gnome-terminal", "Code", "code", "gedit", "Gedit", "bcompare", "Bcompare", "gnome-system-monitor", "Gnome-system-monitor", "google-chrome", "Google-chrome", "anydesk", "Anydesk"]' >> ~/.config/AppsToOpenMaximized.py
-    # echo '' >> ~/.config/AppsToOpenMaximized.py
-    # echo 'wnck_scr = Wnck.Screen.get_default()' >> ~/.config/AppsToOpenMaximized.py
-    # echo 'wnck_scr.force_update()' >> ~/.config/AppsToOpenMaximized.py
-    # echo 'wlist = wnck_scr.get_windows()' >> ~/.config/AppsToOpenMaximized.py
-    # echo 'for w in wlist:' >> ~/.config/AppsToOpenMaximized.py
-    # echo '    if all([' >> ~/.config/AppsToOpenMaximized.py
-    # echo '        w.get_class_group_name() in subjects,' >> ~/.config/AppsToOpenMaximized.py
-    # echo '        w.get_xid() == (int(sys.argv[1]))' >> ~/.config/AppsToOpenMaximized.py
-    # echo '    ]):' >> ~/.config/AppsToOpenMaximized.py
-    # echo '        w.maximize()' >> ~/.config/AppsToOpenMaximized.py
+    Info "Configuring apps to be opened maximized ..."
 
-    wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Maximize.py -O ~/.config/AppsToOpenMaximized.py 2>/dev/null
-    
-    if ( ! which budgie-window-shuffler 1>/dev/null ); then
-        Info "Installing budgie-window-shuffler ..."
-        sudo apt-get -y install budgie-window-shuffler
-        Success "Installed budgie-window-shuffler"
+    sudo apt install devilspie2 -y
+
+    if [ ! -d ~/.config/devilspie2 ]; then
+        mkdir ~/.config/devilspie2
     fi
-    
-    sudo chmod 777 ~/.config/AppsToOpenMaximized.py
-    gsettings set org.ubuntubudgie.windowshuffler newwindowaction ~/.config/AppsToOpenMaximized.py
 
-    Success "AppsToOpenMaximized;$Check"
+    wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Maximize -O ~/.config/devilspie2/maximize.lua
+
+    if [ ! -d ~/.config/autostart ]; then
+        mkdir ~/.config/autostart
+    fi
+
+    wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Autostart -O ~/.config/autostart/devilspie2.desktop
+
+    Success "Configured apps to be opened maximized"
 }
 
 function CreateGitHubAccessTokenFile()
