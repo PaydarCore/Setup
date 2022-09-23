@@ -632,6 +632,7 @@ InstallMicro
 InstallTelnet
 InstallBeyondCompare
 InstallJq
+InstallBaobab
 InstallRename
 InstallWireshark
 DownloadVsCodeExtensions
