@@ -101,8 +101,9 @@ function InstallVsCode()
     sudo apt update
     sudo apt install code -y
 
-    code --install-extension ms-dotnettools.csharp
-    code --install-extension bradlc.vscode-tailwindcss
+    # code --install-extension ms-dotnettools.csharp
+    # code --install-extension bradlc.vscode-tailwindcss
+    code --install-extension ms-vscode-remote.remote-containers
 
     Success "Installed VS Code"
 }
@@ -466,7 +467,7 @@ function DownloadVsCodeExtensions()
 
         sudo mkdir -p /PaydarCore/Extensions
 
-        wget https://storage.paydarsamane.com/files/vsCodeExtensions/csharp.zip -O CSharp.vsix
+        wget https://storage.paydarsamane.com/files/vsCodeExtensions/csharp.vsix -O CSharp.vsix
         sudo mv CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
 
         Success "Downloaded C# VS Code extension "
