@@ -210,6 +210,21 @@ function InstallNode()
     Success "Installed Node"
 }
 
+function UpdateNode()
+{
+    if [[ $(node -v | sed 's/[a-z-]//g' | cut -d'.' -f1) -gt 16 ]]; then
+        Success "Node update;$Check"
+        return
+    fi
+
+    Info "Upgradeing Node ..."
+
+    sudo apt-get -o Dpkg::Options::="--force-overwrite" install nodejs
+        sudo apt install nodejs -y
+
+    Success "Upgraded Node"
+}
+
 function InstallNpm()
 {
     if ( which npm 1>/dev/null ); then
@@ -500,7 +515,8 @@ function GiveAccessToRoot()
 
 function ConfigureKeyboard()
 {
-    if ( ! which dbus-x11 1>/dev/null ); then
+    # if ( ! which dbus-x11 1>/dev/null ); then
+    if [[ $(dpkg -S dbus-x11 2>/dev/null | wc -l) -lt 1 ]]; then
         Info "Installing dbus-x11 ..."
 
         sudo apt install dbus-x11
@@ -622,6 +638,7 @@ InstallDocker
 InstallDockerCompose
 InstallDotNet
 InstallNode
+UpdateNode
 InstallNpm
 # InstallSqlServer
 InstallAzureDataStudio
