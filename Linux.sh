@@ -118,6 +118,7 @@ function InstallGit()
     Info "Installing Git ..."
 
     sudo apt-get install git -y
+    git config --global init.defaultBranch main
 
     Success "Installed Git"
 }
