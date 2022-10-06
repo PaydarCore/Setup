@@ -436,31 +436,24 @@ function ClonePaydarCommands()
     sudo chmod -R 777 /PaydarCore/Commands
     sudo chmod -R 777 /PaydarCore/Scripts
 
-    cd /PaydarCore
-
     if [ ! -d /PaydarCore/Setup/.git ]; then
-        Info "Cloning Paydar Setup ..."
-        git clone https://github.com/PaydarCore/Setup
-        Success "Cloned Setup repository"
+        Info "Cloning Setup repository..."
+        git -C /PaydarCore clone https://github.com/PaydarCore/Setup
+        sudo chmod -R 777 /PaydarCore/Setup
+        Success "Got Setup"
     fi
     if [ ! -d /PaydarCore/Commands/.git ]; then
-    Info "Cloning Paydar Commands ..."
-        git clone https://github.com/PaydarCore/Commands
-        Success "Cloned Commands repository"
+    Info "Cloning Commands repository..."
+        git -C /PaydarCore clone https://github.com/PaydarCore/Commands
+        sudo chmod -R 777 /PaydarCore/Commands
+        Success "Got Commands"
     fi
     if [ ! -d /PaydarCore/Scripts/.git ]; then
-    Info "Cloning Paydar Scripts ..."
-        git clone https://github.com/PaydarCore/Scripts
-        Success "Cloned Scripts repository"
+    Info "Cloning Scripts repository..."
+        git -C /PaydarCore clone https://github.com/PaydarCore/Scripts
+        sudo chmod -R 777 /PaydarCore/Scripts
+        Success "Got Scripts"
     fi
-    
-    sudo chmod -R 777 /PaydarCore/Setup
-    sudo chmod -R 777 /PaydarCore/Commands
-    sudo chmod -R 777 /PaydarCore/Scripts
-    
-    cd /Temp
-
-    Success "Cloned Paydar Commands"
 }
 
 function RegisterPaydarCommands()
@@ -598,6 +591,13 @@ function CreateGitHubAccessTokenFile()
     fi
 }
 
+function CheckGitHubAccessTokenFileContent()
+{
+    if [[ $(cat /LocalSecrets/GitHubAccessToken | wc -c) < 40 ]]; then
+        Error "Invalid content in GitHubAccessToken, make sure save your GitHub Personal Access Token to /LocalSecrets/GitHubAccessToken"
+    fi
+}
+
 function CreateGitGlobalConfig()
 {
     if [ ! -f ~/.gitconfig ]; then
@@ -681,6 +681,7 @@ ConfigureKeyboard
 SetFavoriteApps
 SetAppsToOpenMaximized
 CreateGitHubAccessTokenFile
+CheckGitHubAccessTokenFileContent
 CreateGitGlobalConfig
 # CloneInfra
 PullImages
