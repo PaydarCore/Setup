@@ -426,7 +426,7 @@ function InstallBaobab()
     Success "Installed baobab"
 }
 
-function RegisterPaydarCommands()
+function ClonePaydarCommands()
 {
     sudo mkdir -p /PaydarCore/Setup
     sudo mkdir -p /PaydarCore/Commands
@@ -439,19 +439,32 @@ function RegisterPaydarCommands()
     cd /PaydarCore
 
     if [ ! -d /PaydarCore/Setup/.git ]; then
+        Info "Cloning Paydar Setup ..."
         git clone https://github.com/PaydarCore/Setup
+        Success "Cloned Setup repository"
     fi
     if [ ! -d /PaydarCore/Commands/.git ]; then
+    Info "Cloning Paydar Commands ..."
         git clone https://github.com/PaydarCore/Commands
+        Success "Cloned Commands repository"
     fi
     if [ ! -d /PaydarCore/Scripts/.git ]; then
+    Info "Cloning Paydar Scripts ..."
         git clone https://github.com/PaydarCore/Scripts
+        Success "Cloned Scripts repository"
     fi
     
     sudo chmod -R 777 /PaydarCore/Setup
     sudo chmod -R 777 /PaydarCore/Commands
     sudo chmod -R 777 /PaydarCore/Scripts
     
+    cd /Temp
+
+    Success "Cloned Paydar Commands"
+}
+
+function RegisterPaydarCommands()
+{
     if ( grep -nr PaydarCore /etc/bash.bashrc 1>/dev/null ); then
         Success "Paydar commands;$Check"
         return;
@@ -661,20 +674,18 @@ InstallBaobab
 InstallRename
 InstallWireshark
 DownloadVsCodeExtensions
+ClonePaydarCommands
 RegisterPaydarCommands
-
 GiveAccessToRoot
 ConfigureKeyboard
 SetFavoriteApps
 SetAppsToOpenMaximized
 CreateGitHubAccessTokenFile
 CreateGitGlobalConfig
-
 # CloneInfra
 PullImages
 
 Divide
-
 # Warning "IMPORTANT => RESTART YOUR SYSTEM"
 # SetDockerPermissions
 Divide
