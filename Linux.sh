@@ -428,26 +428,27 @@ function InstallBaobab()
 
 function RegisterPaydarCommands()
 {
+    sudo mkdir -p /PaydarCore/Setup
     sudo mkdir -p /PaydarCore/Commands
+    sudo mkdir -p /PaydarCore/Scripts
+
+    sudo chmod -R 777 /PaydarCore/Setup
     sudo chmod -R 777 /PaydarCore/Commands
+    sudo chmod -R 777 /PaydarCore/Scripts
+
     cd /PaydarCore
+
+    if [ ! -d /PaydarCore/Setup/.git ]; then
+        git clone https://github.com/PaydarCore/Setup
+    fi
     if [ ! -d /PaydarCore/Commands/.git ]; then
         git clone https://github.com/PaydarCore/Commands
-    # else
-    #     git -C /PaydarCore/Commands reset --hard && git -C /PaydarCore/Commands clean -fxd
-    #     git -C /PaydarCore/Commands pull
     fi
-    sudo mkdir -p /PaydarCore/Scripts
-    sudo chmod -R 777 /PaydarCore/Scripts
     if [ ! -d /PaydarCore/Scripts/.git ]; then
         git clone https://github.com/PaydarCore/Scripts
-    # else
-    #     git -C /PaydarCore/Scripts reset --hard && git -C /PaydarCore/Scripts clean -fxd
-    #     git -C /PaydarCore/Scripts pull
     fi
     
-    cd /Temp
-
+    sudo chmod -R 777 /PaydarCore/Setup
     sudo chmod -R 777 /PaydarCore/Commands
     sudo chmod -R 777 /PaydarCore/Scripts
     
@@ -456,6 +457,8 @@ function RegisterPaydarCommands()
         return;
     fi
     
+    cd /Temp
+
     Info "Registering Paydar Commands ..."
 
     sudo chmod 777 /etc/bash.bashrc
