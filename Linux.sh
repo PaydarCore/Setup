@@ -431,21 +431,25 @@ function RegisterPaydarCommands()
     sudo mkdir -p /PaydarCore/Commands
     sudo chmod -R 777 /PaydarCore/Commands
     cd /PaydarCore
-    if [ ! -d /PaydarCore/Commands ]; then
+    if [ ! -d /PaydarCore/Commands/.git ]; then
         git clone https://github.com/PaydarCore/Commands
     # else
     #     git -C /PaydarCore/Commands reset --hard && git -C /PaydarCore/Commands clean -fxd
     #     git -C /PaydarCore/Commands pull
     fi
-    if [ ! -d /PaydarCore/Scripts ]; then
+    sudo mkdir -p /PaydarCore/Scripts
+    sudo chmod -R 777 /PaydarCore/Scripts
+    if [ ! -d /PaydarCore/Scripts/.git ]; then
         git clone https://github.com/PaydarCore/Scripts
     # else
     #     git -C /PaydarCore/Scripts reset --hard && git -C /PaydarCore/Scripts clean -fxd
     #     git -C /PaydarCore/Scripts pull
     fi
+    
     cd /Temp
 
     sudo chmod -R 777 /PaydarCore/Commands
+    sudo chmod -R 777 /PaydarCore/Scripts
     
     if ( grep -nr PaydarCore /etc/bash.bashrc 1>/dev/null ); then
         Success "Paydar commands;$Check"
