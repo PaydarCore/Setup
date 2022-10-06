@@ -591,10 +591,11 @@ function CreateGitHubAccessTokenFile()
     fi
 }
 
-function CheckGitHubAccessTokenFileContent()
+function ValidateGitHubAccessTokenFile()
 {
     if [[ $(cat /LocalSecrets/GitHubAccessToken | wc -c) < 40 ]]; then
         Error "Invalid content in GitHubAccessToken, make sure save your GitHub Personal Access Token to /LocalSecrets/GitHubAccessToken"
+        exit;
     fi
 }
 
@@ -681,7 +682,7 @@ ConfigureKeyboard
 SetFavoriteApps
 SetAppsToOpenMaximized
 CreateGitHubAccessTokenFile
-CheckGitHubAccessTokenFileContent
+ValidateGitHubAccessTokenFile
 CreateGitGlobalConfig
 # CloneInfra
 PullImages
