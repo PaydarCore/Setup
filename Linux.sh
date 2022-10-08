@@ -658,10 +658,10 @@ InstallVsCode
 InstallGit
 InstallDocker
 InstallDockerCompose
-InstallDotNet
-InstallNode
-UpdateNode
-InstallNpm
+# InstallDotNet
+# InstallNode
+# UpdateNode
+# InstallNpm
 # InstallSqlServer
 InstallAzureDataStudio
 InstallAnydesk
