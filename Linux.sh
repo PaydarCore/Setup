@@ -605,6 +605,7 @@ function CreateGitGlobalConfig()
         sudo touch ~/.gitconfig
     fi
     sudo chmod 777 ~/.gitconfig
+    git config --global core.filemode false
 }
 
 function CloneInfra()
