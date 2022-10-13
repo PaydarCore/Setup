@@ -177,78 +177,6 @@ function InstallDockerCompose()
     Success "Installed Docker Compose"
 }
 
-function InstallDotNet()
-{
-    if ( which dotnet 1>/dev/null ); then
-        Success "dotnet;$Check"
-        return
-    fi
-
-    Info "Installing .NET ..."
-
-    wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-    sudo dpkg -i packages-microsoft-prod.deb
-    rm packages-microsoft-prod.deb
-
-    sudo apt-get update 
-    sudo apt-get install -y dotnet-sdk-6.0
-
-    Success "Installed .NET"
-}
-
-function InstallNode()
-{
-    if ( which node 1>/dev/null ); then
-        Success "Node.js;$Check"
-        return
-    fi
-
-    Info "Installing Node ..."
-
-    curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
-    sudo apt install nodejs -y
-
-    Success "Installed Node"
-}
-
-function UpdateNode()
-{
-    if [[ $(node -v | sed 's/[a-z-]//g' | cut -d'.' -f1) -gt 16 ]]; then
-        Success "Node update;$Check"
-        return
-    fi
-
-    Info "Upgradeing Node ..."
-
-    sudo apt-get -o Dpkg::Options::="--force-overwrite" install nodejs
-        sudo apt install nodejs -y
-
-    Success "Upgraded Node"
-}
-
-function InstallNpm()
-{
-    if ( which npm 1>/dev/null ); then
-        Success "NPM;$Check"
-        return
-    fi
-
-    Info "Installing NPM ..."
-
-    sudo apt install npm -y
-
-    Success "Installed NPM"
-}
-
-function InstallSqlServer()
-{
-    Write "Installing SQL Server ..."
-
-    # 22.04 is not supported yet. use Docker
-
-    Write "Installed SQL Server"
-}
-
 function InstallAzureDataStudio()
 {
     if ( which azuredatastudio 1>/dev/null ); then
@@ -519,6 +447,18 @@ function DownloadVsCodeExtensions()
     # fi
 }
 
+function DownloadImageForStorage()
+{
+    if [ -f /PaydarCore/Images/NoImage ]; then
+        Success "NoImage;$Check"
+    else
+        Width=$(shuf -i 100-900 -n 1)
+        Height=$(shuf -i 100-900 -n 1)
+        sudo mkdir -p /PaydarCore/Images
+        sudo wget https://picsum.photos/$Width/$Height -O /PaydarCore/Images/NoImage
+    fi
+}
+
 function GiveAccessToRoot()
 {
     sudo mkdir -p /root/.ssh
@@ -659,11 +599,6 @@ InstallVsCode
 InstallGit
 InstallDocker
 InstallDockerCompose
-# InstallDotNet
-# InstallNode
-# UpdateNode
-# InstallNpm
-# InstallSqlServer
 InstallAzureDataStudio
 InstallAnydesk
 InstallNginx
@@ -676,6 +611,7 @@ InstallBaobab
 InstallRename
 InstallWireshark
 DownloadVsCodeExtensions
+DownloadImageForStorage
 ClonePaydarCommands
 RegisterPaydarCommands
 GiveAccessToRoot
