@@ -449,7 +449,7 @@ function DownloadVsCodeExtensions()
 
 function DownloadImageForStorage()
 {
-    if [ -f /PaydarCore/Images/NoImage ]; then
+    if [ -f /PaydarCore/Images/NoImage ] && [ -s /PaydarCore/Images/NoImage ]; then
         Success "NoImage;$Check"
     else
         Width=$(shuf -i 100-900 -n 1)
