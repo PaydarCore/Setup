@@ -452,8 +452,8 @@ function DownloadImageForStorage()
     if [ -f /PaydarCore/Images/NoImage ] && [ -s /PaydarCore/Images/NoImage ]; then
         Success "NoImage;$Check"
     else
-        Width=$(shuf -i 100-900 -n 1)
-        Height=$(shuf -i 100-900 -n 1)
+        Width=800 # $(shuf -i 100-900 -n 1)
+        Height=640 # $(shuf -i 100-900 -n 1)
         sudo mkdir -p /PaydarCore/Images
         sudo wget https://picsum.photos/$Width/$Height -O /PaydarCore/Images/NoImage
     fi
