@@ -118,7 +118,6 @@ function InstallGit()
     Info "Installing Git ..."
 
     sudo apt-get install git -y
-    git config --global init.defaultBranch main
 
     Success "Installed Git"
 }
@@ -613,6 +612,7 @@ InstallRename
 InstallWireshark
 DownloadVsCodeExtensions
 DownloadImageForStorage
+CreateGitGlobalConfig
 ClonePaydarCommands
 RegisterPaydarCommands
 GiveAccessToRoot
@@ -621,7 +621,7 @@ SetFavoriteApps
 SetAppsToOpenMaximized
 CreateGitHubAccessTokenFile
 ValidateGitHubAccessTokenFile
-CreateGitGlobalConfig
+
 # CloneInfra
 PullImages
 
