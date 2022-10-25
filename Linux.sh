@@ -546,6 +546,7 @@ function CreateGitGlobalConfig()
     fi
     sudo chmod 777 ~/.gitconfig
     git config --global core.filemode false
+    git config --global init.defaultBranch main
 }
 
 function CloneInfra()
