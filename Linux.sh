@@ -359,6 +359,7 @@ function ClonePaydarCommands()
     sudo mkdir -p /PaydarCore/Commands
     sudo mkdir -p /PaydarCore/Scripts
 
+    sudo chmod 777 /PaydarCore
     sudo chmod -R 777 /PaydarCore/Setup
     sudo chmod -R 777 /PaydarCore/Commands
     sudo chmod -R 777 /PaydarCore/Scripts
