@@ -424,8 +424,12 @@ function DownloadVsCodeExtensions()
 
         sudo mkdir -p /PaydarCore/Extensions
 
-        wget http://dev.paydarsamane.com/CSharp.vsix -O CSharp.vsix
-        sudo mv CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
+        if [ -f /media/$USER/Repository/PaydarCore/Extensions/CSharp.vsix ]; then
+            sudo cp /media/$USER/Repository/PaydarCore/Extensions/CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
+        else
+            wget http://dev.paydarsamane.com/CSharp.vsix -O CSharp.vsix
+            sudo mv CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
+        fi
 
         Success "Downloaded C# VS Code extension "
 
