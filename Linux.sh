@@ -75,10 +75,15 @@ function InstallChrome()
 
     Info "Installing Google Chrome ..."
 
-    sudo apt-get update 
-    #sudo apt upgrade
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O chrome
-    sudo dpkg -i chrome
+    sudo apt-get update
+
+    if [ -f /media/$USER/Repository/Files/chrome ]; then
+        sudo cp /media/$USER/Repository/Files/chrome /Temp
+    else
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /Temp/chrome
+    fi
+    
+    sudo dpkg -i /Temp/chrome
 
     Success "Installed Google Chrome"
 }
@@ -185,9 +190,14 @@ function InstallAzureDataStudio()
 
     Info "Installing Azure Data Studio ..."
 
-    wget https://go.microsoft.com/fwlink/?linkid=2202429
-    mv index.html\?linkid\=2202429 ads.deb
-    sudo apt install ./ads.deb -y
+    if [ -f /media/$USER/Repository/Files/ads.deb ]; then
+        sudo cp /media/$USER/Repository/Files/ads.deb /Temp
+    else
+        wget https://go.microsoft.com/fwlink/?linkid=2202429
+        mv index.html\?linkid\=2202429 /Temp/ads.deb
+    fi
+    
+    sudo apt install /Temp/ads.deb -y
     # If not connecting => [update OpenSSL](https://github.com/microsoft/azuredatastudio/issues/13457#issuecomment-832202549)
 
     Success "Installed Azure Data Studio"
@@ -424,11 +434,11 @@ function DownloadVsCodeExtensions()
 
         sudo mkdir -p /PaydarCore/Extensions
 
-        if [ -f /media/$USER/Repository/PaydarCore/Extensions/CSharp.vsix ]; then
-            sudo cp /media/$USER/Repository/PaydarCore/Extensions/CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
+        if [ -f /media/$USER/Repository/Files/CSharp.vsix ]; then
+            sudo cp /media/$USER/Repository/Files/CSharp.vsix /PaydarCore/Extensions
         else
-            wget http://dev.paydarsamane.com/CSharp.vsix -O CSharp.vsix
-            sudo mv CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
+            wget http://dev.paydarsamane.com/CSharp.vsix -O /Temp/CSharp.vsix
+            sudo mv /Temp/CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
         fi
 
         Success "Downloaded C# VS Code extension "
