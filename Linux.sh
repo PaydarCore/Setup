@@ -559,6 +559,13 @@ function CloneInfra()
     fi
 }
 
+function PullImagesFromDisk()
+{
+    if [ -d /media/$USER/Repository/ ]; then
+        DockerPull
+    fi
+}
+
 function PullImages()
 {
     if ( docker image ls | grep dotnet 1>/dev/null ); then
@@ -624,6 +631,7 @@ CreateGitHubAccessTokenFile
 ValidateGitHubAccessTokenFile
 
 # CloneInfra
+PullImagesFromDisk
 PullImages
 
 Divide
