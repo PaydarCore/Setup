@@ -69,7 +69,7 @@
 - Git 
   - Generate keys and add your public key to GitHub 
     - Open terminal 
-    - ssh-keygen -t ed25519 -C "your-github-email" 
+    - `ssh-keygen -t ed25519 -C "your-github-email"`
     - Enter 3 times 
       - Accept default filename 
       - Empty password 
