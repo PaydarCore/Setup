@@ -58,11 +58,6 @@
 
 ---
 
-- Install VPN and connect to it (in case of doubt, ASK)
-- Update Ubuntu (using VPN)
-  - Settings
-  - Software Update
-
 - Install software using script
   - `sudo mkdir /Temp`
   - `sudo chmod 777 /Temp`
@@ -140,6 +135,10 @@
   - `sudo ln -f -s ~/.ssh/id_ed25519.pub /root/.ssh/id_ed25519.pub`
   - `sudo ln -f -s ~/.ssh/known_hosts /root/.ssh/known_hosts`
 
+- Update Ubuntu (using VPN)
+  - Settings
+  - Software Update
+  
 * Development
   - Clone PaydarCore
   - Clone PaydarNode
