@@ -508,24 +508,27 @@ function SetAppsToOpenMaximized()
 {
     if ( which devilspie2 1>/dev/null ); then
         Success "devilspie2;$Check"
-        return
+    else
+        sudo apt install devilspie2 -y
     fi
 
     Info "Configuring apps to be opened maximized ..."
-
-    sudo apt install devilspie2 -y
 
     if [ ! -d ~/.config/devilspie2 ]; then
         mkdir ~/.config/devilspie2
     fi
 
-    wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Maximize -O ~/.config/devilspie2/maximize.lua
+    if [ ! -f ~/.config/devilspie2/maximize.lua ]; then
+        wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Maximize -O ~/.config/devilspie2/maximize.lua
+    fi
 
     if [ ! -d ~/.config/autostart ]; then
         mkdir ~/.config/autostart
     fi
 
-    wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Autostart -O ~/.config/autostart/devilspie2.desktop
+    if [ ! -f ~/.config/autostart/devilspie2.desktop ]; then
+        wget https://raw.githubusercontent.com/PaydarCore/Setup/main/Autostart -O ~/.config/autostart/devilspie2.desktop
+    fi
 
     Success "Configured apps to be opened maximized"
 }
