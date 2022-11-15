@@ -32,11 +32,11 @@
     - **DO NOT** choose *Log in automatically*
     - **CHOOSE** *Require my password to login*
   - Wait for installation
+  - **DO NOT** add your account to Ubuntu (Google or any other account)
   - **DO NOT** help Ubuntu
     - Select **No, don't send system info**
   - Privacy off
-  - Click **Done** (don't worry about progress)
-  - Remove everything from the left bar except the recycle bin and files
+  - Click **Done**
   - Change culture
     - Settings
     - Region & Language
@@ -46,13 +46,6 @@
   - Install Persian language
     - **DO NOT** install any languages other than English & Persian
         - **DO NOT** change defaults
-  - Confiture the keyboard
-    - Settings
-      - Accessibility
-      - Typing
-      - Repeat keys
-      - Delay = almost 10%
-      - Speed = almost 60%
   
 </details>
 
