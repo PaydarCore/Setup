@@ -303,6 +303,20 @@ function InstallBeyondCompare()
     Success "Installed Beyond Compare"
 }
 
+function InstallSshServer()
+{
+    if ( which openssh-server 1>/dev/null ); then
+        Success "OpenSSH;$Check"
+        return;
+    fi
+
+    Info "Installing SSH Serer ..."
+
+    sudo apt install openssh-server -y
+
+    Success "Installed SSH Serer"
+}
+
 function InstallWireshark()
 {
     if ( which wireshark 1>/dev/null ); then
@@ -630,6 +644,7 @@ InstallMkcert
 InstallMicro
 InstallTelnet
 InstallBeyondCompare
+InstallSshServer
 InstallJq
 InstallBaobab
 InstallRename
