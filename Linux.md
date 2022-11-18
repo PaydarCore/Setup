@@ -43,9 +43,6 @@
     - Format
     - United States
   - Connect to WiFi
-  - Install Persian language
-    - **DO NOT** install any languages other than English & Persian
-        - **DO NOT** change defaults
   
 </details>
 

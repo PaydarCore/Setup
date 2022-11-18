@@ -362,6 +362,20 @@ function InstallRename()
     Success "Installed rename"
 }
 
+function InstallParallel()
+{
+    if ( which parallel 1>/dev/null ); then
+        Success "Parallel;$Check"
+        return
+    fi
+
+    Info "Installing parallel ..."
+
+    sudo apt install parallel -y
+
+    Success "Installed parallel"
+}
+
 function InstallBaobab()
 {
     if ( which baobab 1>/dev/null ); then
@@ -492,6 +506,20 @@ function GiveAccessToRoot()
     sudo ln -f -s ~/.ssh/id_ed25519 /root/.ssh/id_ed25519
     sudo ln -f -s ~/.ssh/id_ed25519.pub /root/.ssh/id_ed25519.pub
     sudo ln -f -s ~/.ssh/known_hosts /root/.ssh/known_hosts
+}
+
+function AddPersianInputSource()
+{
+    if [[ $( gsettings get org.gnome.desktop.input-sources sources | grep ir ) ]]; then
+        Success "Persian;$Check"
+        return;
+    fi
+
+    Info "Adding Persian ..."
+
+    gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ir')]"
+
+    Success "Added Persian"
 }
 
 function ConfigureKeyboard()
@@ -648,6 +676,7 @@ InstallSshServer
 InstallJq
 InstallBaobab
 InstallRename
+InstallParallel
 InstallWireshark
 DownloadVsCodeExtensions
 DownloadImageForStorage
@@ -655,6 +684,7 @@ CreateGitGlobalConfig
 ClonePaydarCommands
 RegisterPaydarCommands
 GiveAccessToRoot
+AddPersianInputSource
 ConfigureKeyboard
 SetFavoriteApps
 SetAppsToOpenMaximized
@@ -667,5 +697,5 @@ PullImages
 
 Divide
 # Warning "IMPORTANT => RESTART YOUR SYSTEM"
-# SetDockerPermissions
+SetDockerPermissions
 Divide
