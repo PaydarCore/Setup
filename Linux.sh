@@ -305,7 +305,7 @@ function InstallBeyondCompare()
 
 function InstallSshServer()
 {
-    if ( which openssh-server 1>/dev/null ); then
+    if ( which sshd 1>/dev/null ); then
         Success "OpenSSH;$Check"
         return;
     fi
