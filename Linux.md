@@ -37,11 +37,6 @@
     - Select **No, don't send system info**
   - Privacy off
   - Click **Done**
-  - Change culture
-    - Settings
-    - Region & Language
-    - Format
-    - United States
   - Connect to WiFi
   
 </details>
@@ -100,17 +95,7 @@
     - Search for “word wrap”
     - Select “on” from the dropdown
 
-- Configuration
-  - Add these to favorites, in order
-    - Files
-    - Chrome
-    - VS Code
-    - Terminal
-    - Editor
-
 - Chrome
-  - Make default
-    - On the first run, it asks for it
   - Do not send crash reports
   - Sign in
   - Extensions

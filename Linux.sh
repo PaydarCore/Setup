@@ -522,6 +522,23 @@ function AddPersianInputSource()
     Success "Added Persian"
 }
 
+function SetLocaleToEnglishUs()
+{
+    if [[ $( locale | grep LANG=en_US.UTF-8 ) ]] && [[ $( gsettings get org.gnome.system.locale region ) == 'en_US.UTF-8' ]]; then
+        Success "US English locale;$Check"
+        return;
+    fi
+
+    Info "Setting locale to US English ..."
+
+    sudo update-locale LANG=en_US.UTF-8
+    gsettings set org.gnome.system.locale region 'en_US.UTF-8'
+    dbus-send --print-reply --system --dest=org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User.SetFormatsLocale string:'en_US.UTF-8' 1>/dev/null
+
+
+    Success "Set locale to US English"
+}
+
 function ConfigureKeyboard()
 {
     # if ( ! which dbus-x11 1>/dev/null ); then
@@ -546,6 +563,17 @@ function SetFavoriteApps()
     gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'code.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.gedit.desktop']"
 }
 
+function SetGoogleAsTheDefaultBrowser()
+{
+    Info "Setting Chrome as the default browser ..."
+
+    sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/google-chrome 500 1>/dev/null
+    sudo update-alternatives --set x-www-browser /usr/bin/google-chrome 1>/dev/null
+
+    Success "Set Chrome as the default browser"
+}
+
+SetGoogleAsDefaultBrowser
 function SetAppsToOpenMaximized()
 {
     if ( which devilspie2 1>/dev/null ); then
@@ -685,8 +713,10 @@ ClonePaydarCommands
 RegisterPaydarCommands
 GiveAccessToRoot
 AddPersianInputSource
+SetLocaleToEnglishUs
 ConfigureKeyboard
 SetFavoriteApps
+SetGoogleAsTheDefaultBrowser
 SetAppsToOpenMaximized
 CreateGitHubAccessTokenFile
 ValidateGitHubAccessTokenFile
