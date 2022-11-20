@@ -464,7 +464,9 @@ function DownloadVsCodeExtensions()
         if [ -f /media/$USER/Repository/Files/CSharp.vsix ]; then
             sudo cp /media/$USER/Repository/Files/CSharp.vsix /PaydarCore/Extensions
         else
-            wget http://dev.paydarsamane.com/CSharp.vsix -O /Temp/CSharp.vsix
+            # wget http://dev.paydarsamane.com/CSharp.vsix -O /Temp/CSharp.vsix
+            # wget https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-dotnettools/vsextensions/csharp/1.25.2/vspackage?targetPlatform=linux-x64 -O /Temp/CSharp.vsix
+            wget https://holism.blob.core.windows.net/downloads/csharp.vsix -O CSharp.vsix
             sudo mv /Temp/CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
         fi
 
@@ -563,7 +565,7 @@ function SetFavoriteApps()
     gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'code.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.gedit.desktop']"
 }
 
-function SetGoogleAsTheDefaultBrowser()
+function SetChromeAsTheDefaultBrowser()
 {
     Info "Setting Chrome as the default browser ..."
 
@@ -573,7 +575,6 @@ function SetGoogleAsTheDefaultBrowser()
     Success "Set Chrome as the default browser"
 }
 
-SetGoogleAsDefaultBrowser
 function SetAppsToOpenMaximized()
 {
     if ( which devilspie2 1>/dev/null ); then
@@ -716,7 +717,7 @@ AddPersianInputSource
 SetLocaleToEnglishUs
 ConfigureKeyboard
 SetFavoriteApps
-SetGoogleAsTheDefaultBrowser
+SetChromeAsTheDefaultBrowser
 SetAppsToOpenMaximized
 CreateGitHubAccessTokenFile
 ValidateGitHubAccessTokenFile
