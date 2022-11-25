@@ -333,6 +333,20 @@ function InstallWireshark()
     Success "Installed Wireshark"
 }
 
+function InstallHttpie()
+{
+    if ( which http 1>/dev/null ); then
+        Success "HTTPie;$Check"
+        return;
+    fi
+
+    Info "Installing HTTPie ..."
+
+    sudo apt install httpie -y
+
+    Success "Installed HTTPie"
+}
+
 function InstallJq()
 {
     if ( which jq 1>/dev/null ); then
@@ -702,6 +716,7 @@ InstallMicro
 InstallTelnet
 InstallBeyondCompare
 InstallSshServer
+InstallHttpie
 InstallJq
 InstallBaobab
 InstallRename
