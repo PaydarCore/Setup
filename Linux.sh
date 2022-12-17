@@ -561,7 +561,7 @@ function ConfigureKeyboard()
     if [[ $(dpkg -S dbus-x11 2>/dev/null | wc -l) -lt 1 ]]; then
         Info "Installing dbus-x11 ..."
 
-        sudo apt install dbus-x11
+        sudo apt install dbus-x11 -y
 
         Success "Installed dbus-x11"
         Info "Configring keyboard ..."
