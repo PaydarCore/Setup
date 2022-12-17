@@ -194,7 +194,7 @@ function InstallAzureDataStudio()
         sudo cp /media/$USER/Repository/Files/ads.deb /Temp
     else
         wget https://go.microsoft.com/fwlink/?linkid=2215528
-        mv index.html\?linkid\=2202429 /Temp/ads.deb
+        mv index.html\?linkid\=2215528 /Temp/ads.deb
     fi
     
     sudo apt install /Temp/ads.deb -y
