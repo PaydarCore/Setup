@@ -721,7 +721,6 @@ InstallJq
 InstallBaobab
 InstallRename
 InstallParallel
-InstallWireshark
 DownloadVsCodeExtensions
 DownloadImageForStorage
 CreateGitGlobalConfig
