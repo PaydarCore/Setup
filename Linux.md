@@ -116,8 +116,7 @@
   - `sudo ln -f -s ~/.ssh/known_hosts /root/.ssh/known_hosts`
 
 - Update Ubuntu (using VPN)
-  - Settings
-  - Software Update
+  - `Update`
   
 * Development
   - Clone PaydarCore
