@@ -688,10 +688,10 @@ function PullImages()
         docker pull paydar/sql
     fi
     if ( docker image ls | grep next 1>/dev/null ); then
-        Success "paydar/next;$Check"
+        Success "paydar/site;$Check"
     else
-        Info "Getting paydar/next"
-        docker pull paydar/next
+        Info "Getting paydar/site"
+        docker pull paydar/site
     fi
 }
 
