@@ -669,23 +669,23 @@ function PullImagesFromDisk()
 
 function PullImages()
 {
-    if ( docker image ls | grep dotnet 1>/dev/null ); then
-        Success "paydar/dotnet;$Check"
+    if ( docker image ls | grep api 1>/dev/null ); then
+        Success "paydar/api;$Check"
     else
-        Info "Getting paydar/dotnet"
-        docker pull paydar/dotnet
+        Info "Getting paydar/api"
+        docker pull paydar/api
     fi
-    if ( docker image ls | grep react 1>/dev/null ); then
-        Success "paydar/react;$Check"
+    if ( docker image ls | grep panel 1>/dev/null ); then
+        Success "paydar/panel;$Check"
     else
-        Info "Getting paydar/react"
-        docker pull paydar/react
+        Info "Getting paydar/panel"
+        docker pull paydar/panel
     fi
-    if ( docker image ls | grep sql 1>/dev/null ); then
-        Success "paydar/sql;$Check"
+    if ( docker image ls | grep database 1>/dev/null ); then
+        Success "paydar/database;$Check"
     else
-        Info "Getting paydar/sql"
-        docker pull paydar/sql
+        Info "Getting paydar/database"
+        docker pull paydar/database
     fi
     if ( docker image ls | grep next 1>/dev/null ); then
         Success "paydar/site;$Check"
