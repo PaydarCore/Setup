@@ -31,9 +31,9 @@ function Error()
 
 function Divide()
 {
-    echo ""
+    echo
     echo "${magenta}----------${reset}"
-    echo ""
+    echo
 }
 
 function InstallVpn()
@@ -695,7 +695,7 @@ function PullImages()
     fi
 }
 
-sudo echo ""
+sudo echo
 cd /Temp
 
 Divide
