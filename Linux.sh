@@ -85,6 +85,8 @@ function InstallChrome()
     
     sudo dpkg -i /Temp/chrome
 
+    rm -rf /Temp/chrome
+
     Success "Installed Google Chrome"
 }
 
@@ -199,6 +201,7 @@ function InstallAzureDataStudio()
     
     sudo apt install /Temp/ads.deb -y
     # If not connecting => [update OpenSSL](https://github.com/microsoft/azuredatastudio/issues/13457#issuecomment-832202549)
+    rm -rf /Temp/ads.deb
 
     Success "Installed Azure Data Studio"
 }
@@ -249,10 +252,12 @@ function InstallMkcert()
     Info "Installing Mkcert ..."
 
     sudo apt install libnss3-tools
-    wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O mkcert
+    wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O -O /Temp/mkcert
     sudo cp mkcert /usr/local/bin/mkcert
     sudo chmod +x /usr/local/bin/mkcert
     mkcert -install
+
+    rm -rf /Temp/mkcert
 
     Success "Installed Mkcert"
 }
@@ -735,12 +740,9 @@ SetChromeAsTheDefaultBrowser
 SetAppsToOpenMaximized
 CreateGitHubAccessTokenFile
 ValidateGitHubAccessTokenFile
-
 # CloneInfra
-PullImagesFromDisk
-PullImages
-
 Divide
 # Warning "IMPORTANT => RESTART YOUR SYSTEM"
 SetDockerPermissions
 Divide
+Age
