@@ -740,9 +740,8 @@ SetChromeAsTheDefaultBrowser
 SetAppsToOpenMaximized
 CreateGitHubAccessTokenFile
 ValidateGitHubAccessTokenFile
+
 # CloneInfra
 Divide
 # Warning "IMPORTANT => RESTART YOUR SYSTEM"
 SetDockerPermissions
-Divide
-Age
