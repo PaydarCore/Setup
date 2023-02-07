@@ -38,17 +38,23 @@ function Divide()
 
 function InstallVpn()
 {
-    if ( which openconnect 1>/dev/null ); then
-        Success "OpenConnect;$Check"
+    if ( which piactl 1>/dev/null ); then
+        Success "Private Internet Access;$Check"
     else
-        Info "Installing openconnect ..."
+        Info "Installing Private Internet Access ..."
 
-        sudo apt install openconnect -y
+        wget https://storage.paydarsamane.com/Files/Dev/pia-linux.zip -O /Temp/pia-linux.zip
+        sudo unzip /Temp/pia-linux.zip
+        sudo chmod 777 /Temp/pia-linux-3.3.1-06924.run
+        sudo sh /Temp/pia-linux-3.3.1-06924.run
+        sudo rm -rf /Temp/pia-linux-3.3.1-06924.run
 
-        Success "Installed openconnect"
+        Success "Installed Private Internet Access"
     fi
 
-    if [ ! -f /Vpn ]; then
+    if [ ! -f /LocalSecrets/Vpn ]; then
+        sudo mkdir /LocalSecrets
+        sudo chmod 777 /LocalSecrets
         Divide
         Info Please enter your VPN username
         Divide
@@ -58,11 +64,10 @@ function InstallVpn()
         Divide
         read Password
         Divide
-        Info Please give me the VPN server address
-        Divide
         read Server
-        echo "printf '$Username\n$Password' | sudo openconnect $Server" | sudo tee -a /Vpn > /dev/null
-        sudo chmod 777 /Vpn
+        echo $Username > /LocalSecrets/Vpn
+        echo $Password >> /LocalSecrets/Vpn
+        sudo chmod 777 /LocalSecrets/Vpn
     fi
 }
 
