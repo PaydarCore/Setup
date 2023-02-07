@@ -38,21 +38,6 @@ function Divide()
 
 function InstallVpn()
 {
-    if ( which piactl 1>/dev/null ); then
-        Success "Private Internet Access;$Check"
-    else
-        Info "Installing Private Internet Access ..."
-
-        wget https://storage.paydarsamane.com/Files/FileManager/Dev/pia-linux.zip -O /Temp/pia-linux.zip
-        sudo unzip /Temp/pia-linux.zip
-        sudo chmod 777 /Temp/pia-linux-3.3.1-06924.run
-        sh /Temp/pia-linux-3.3.1-06924.run
-        sudo rm -rf /Temp/pia-linux-3.3.1-06924.run
-        sudo rm -rf /Temp/pia-linux.zip
-
-        Success "Installed Private Internet Access"
-    fi
-
     if [ ! -f /LocalSecrets/Vpn ]; then
         sudo mkdir /LocalSecrets
         sudo chmod 777 /LocalSecrets
@@ -69,7 +54,23 @@ function InstallVpn()
         echo $Username > /LocalSecrets/Vpn
         echo $Password >> /LocalSecrets/Vpn
         sudo chmod 777 /LocalSecrets/Vpn
+    fi
+
+    if ( which piactl 1>/dev/null ); then
+        Success "Private Internet Access;$Check"
+    else
+        Info "Installing Private Internet Access ..."
+
+        wget https://storage.paydarsamane.com/Files/FileManager/Dev/pia-linux.zip -O /Temp/pia-linux.zip
+        sudo unzip /Temp/pia-linux.zip
+        sudo chmod 777 /Temp/pia-linux-3.3.1-06924.run
+        sh /Temp/pia-linux-3.3.1-06924.run
+        sudo rm -rf /Temp/pia-linux-3.3.1-06924.run
+        sudo rm -rf /Temp/pia-linux.zip
+
         piactl login /LocalSecrets/Vpn
+        
+        Success "Installed Private Internet Access"
     fi
 }
 
