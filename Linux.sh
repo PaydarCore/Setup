@@ -43,11 +43,12 @@ function InstallVpn()
     else
         Info "Installing Private Internet Access ..."
 
-        wget https://storage.paydarsamane.com/Files/Dev/pia-linux.zip -O /Temp/pia-linux.zip
+        wget https://storage.paydarsamane.com/Files/FileManager/Dev/pia-linux.zip -O /Temp/pia-linux.zip
         sudo unzip /Temp/pia-linux.zip
         sudo chmod 777 /Temp/pia-linux-3.3.1-06924.run
-        sudo sh /Temp/pia-linux-3.3.1-06924.run
+        sh /Temp/pia-linux-3.3.1-06924.run
         sudo rm -rf /Temp/pia-linux-3.3.1-06924.run
+        sudo rm -rf /Temp/pia-linux.zip
 
         Success "Installed Private Internet Access"
     fi
@@ -68,6 +69,7 @@ function InstallVpn()
         echo $Username > /LocalSecrets/Vpn
         echo $Password >> /LocalSecrets/Vpn
         sudo chmod 777 /LocalSecrets/Vpn
+        piactl login /LocalSecrets/Vpn
     fi
 }
 
