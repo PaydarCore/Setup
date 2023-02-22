@@ -117,6 +117,8 @@
 
 - Update Ubuntu (using VPN)
   - `Update`
+
+- In case of **tp-link**, https://github.com/nlkguy/archer-t2u-plus-linux
   
 * Development
   - Clone PaydarCore
