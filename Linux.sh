@@ -753,3 +753,33 @@ ValidateGitHubAccessTokenFile
 Divide
 # Warning "IMPORTANT => RESTART YOUR SYSTEM"
 SetDockerPermissions
+
+function InstallNode()
+{
+    if ( which node 1>/dev/null ); then
+        Success "Node.js;$Check"
+        return
+    fi
+
+    Info "Installing Node ..."
+
+    curl -sL https://raw.githubusercontent.com/nodesource/distributions/master/deb/setup_18.x | sudo bash -
+    sudo apt install nodejs -y
+
+    Success "Installed Node"
+}
+
+function UpdateNode()
+{
+    if [[ $(node -v | sed 's/[a-z-]//g' | cut -d'.' -f1) -gt 16 ]]; then
+        Success "Node update;$Check"
+        return
+    fi
+
+    Info "Upgradeing Node ..."
+
+    sudo apt-get -o Dpkg::Options::="--force-overwrite" install nodejs
+    sudo apt install nodejs -y
+
+    Success "Upgraded Node"
+}
