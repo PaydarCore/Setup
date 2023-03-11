@@ -783,3 +783,16 @@ function UpdateNode()
 
     Success "Upgraded Node"
 }
+
+function InstallV2Ray()
+{
+    sudo snap install v2ray-core
+    # go to https://github.com/Matsuridayo/nekoray/releases
+    # download nekoray-*****-linux64.zip
+    # Preferences => Basic settings => Security => Skip TLS => should be checked
+    # Preferences => Basic settings => Subscription => Ignore TLS => should be checked
+    # Preferences => Groups => New group => select subscription and enter link
+    # Update subscription
+    # Make sure VPN Mode is checked
+    # Connect
+}
