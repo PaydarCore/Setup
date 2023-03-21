@@ -301,6 +301,20 @@ function InstallBeyondCompare()
 
 function InstallSshServer()
 {
+    if ( which parallel-ssh 1>/dev/null ); then
+        Success "ParallelSSH;$Check"
+        return;
+    fi
+
+    Info "Installing Parallel SSH ..."
+
+    sudo apt -y install pssh
+
+    Success "Installed Parallel SSH"
+}
+
+function InstallParallelSsh()
+{
     if ( which sshd 1>/dev/null ); then
         Success "OpenSSH;$Check"
         return;
@@ -712,6 +726,7 @@ InstallMicro
 InstallTelnet
 InstallBeyondCompare
 InstallSshServer
+InstallParallelSsh
 InstallHttpie
 InstallJq
 InstallBaobab
