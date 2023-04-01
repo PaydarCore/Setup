@@ -36,26 +36,26 @@ function Divide()
     echo
 }
 
-function InstallVpn()
-{
-    if [ ! -f /LocalSecrets/Vpn ]; then
-        sudo mkdir /LocalSecrets
-        sudo chmod 777 /LocalSecrets
-        Divide
-        Info Please enter your VPN username
-        Divide
-        read Username
-        Divide
-        Info Please enter your VPN password
-        Divide
-        read Password
-        Divide
-        read Server
-        echo $Username > /LocalSecrets/Vpn
-        echo $Password >> /LocalSecrets/Vpn
-        sudo chmod 777 /LocalSecrets/Vpn
-    fi
-}
+# function InstallVpn()
+# {
+#     if [ ! -f /LocalSecrets/Vpn ]; then
+#         sudo mkdir /LocalSecrets
+#         sudo chmod 777 /LocalSecrets
+#         Divide
+#         Info Please enter your VPN username
+#         Divide
+#         read Username
+#         Divide
+#         Info Please enter your VPN password
+#         Divide
+#         read Password
+#         Divide
+#         read Server
+#         echo $Username > /LocalSecrets/Vpn
+#         echo $Password >> /LocalSecrets/Vpn
+#         sudo chmod 777 /LocalSecrets/Vpn
+#     fi
+# }
 
 function InstallChrome()
 {
@@ -325,6 +325,27 @@ function InstallParallelSsh()
     sudo apt install openssh-server -y
 
     Success "Installed SSH Serer"
+}
+
+function InstallBashCompletion()
+{
+    grep -wq '^source /etc/profile.d/bash_completion.sh' ~/.bashrc || echo 'source /etc/profile.d/bash_completion.sh'>>~/.bashrc
+    source /etc/profile.d/bash_completion.sh
+    # complete -W 'Suggestion1 Suggestion2 Suggestion3' YourCommand
+
+    if [ -f /etc/profile.d/bash_completion.sh ]; then
+        Success "BashCompletion;$Check"
+        BashCompletionWordListUpdate
+        return;
+    fi
+
+    Info "Installing BashCompletion ..."
+
+    sudo apt install bash-completion -y
+
+    Success "Installed BashCompletion"
+
+    BashCompletionWordListUpdate
 }
 
 function InstallWireshark()
@@ -712,7 +733,7 @@ Divide
 Info "Paydar Holding Installation"
 Divide
 
-InstallVpn
+# InstallVpn
 InstallChrome
 InstallVsCode
 InstallGit
@@ -732,6 +753,7 @@ InstallJq
 InstallBaobab
 InstallRename
 InstallParallel
+InstallBashCompletion
 DownloadVsCodeExtensions
 DownloadImageForStorage
 CreateGitGlobalConfig
