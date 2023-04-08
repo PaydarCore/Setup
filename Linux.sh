@@ -36,26 +36,39 @@ function Divide()
     echo
 }
 
-# function InstallVpn()
-# {
-#     if [ ! -f /LocalSecrets/Vpn ]; then
-#         sudo mkdir /LocalSecrets
-#         sudo chmod 777 /LocalSecrets
-#         Divide
-#         Info Please enter your VPN username
-#         Divide
-#         read Username
-#         Divide
-#         Info Please enter your VPN password
-#         Divide
-#         read Password
-#         Divide
-#         read Server
-#         echo $Username > /LocalSecrets/Vpn
-#         echo $Password >> /LocalSecrets/Vpn
-#         sudo chmod 777 /LocalSecrets/Vpn
-#     fi
-# }
+function InstallVpn()
+{
+    if [ ! -f /LocalSecrets/Vpn ]; then
+        sudo mkdir /LocalSecrets
+        sudo chmod 777 /LocalSecrets
+        Divide
+        Info Please enter your VPN username
+        Divide
+        read Username
+        Divide
+        Info Please enter your VPN password
+        Divide
+        read Password
+        Divide
+        read Server
+        echo $Username > /LocalSecrets/Vpn
+        echo $Password >> /LocalSecrets/Vpn
+        sudo chmod 777 /LocalSecrets/Vpn
+    fi
+}
+
+function InstallV2Ray()
+{
+    sudo snap install v2ray-core
+    # go to https://github.com/Matsuridayo/nekoray/releases
+    # download nekoray-*****-linux64.zip
+    # Preferences => Basic settings => Security => Skip TLS => should be checked
+    # Preferences => Basic settings => Subscription => Ignore TLS => should be checked
+    # Preferences => Groups => New group => select subscription and enter link
+    # Update subscription
+    # Make sure VPN Mode is checked
+    # Connect
+}
 
 function InstallChrome()
 {
@@ -118,6 +131,36 @@ function InstallGit()
     sudo apt-get install git -y
 
     Success "Installed Git"
+}
+
+function InstallNode()
+{
+    if ( which node 1>/dev/null ); then
+        Success "Node.js;$Check"
+        return
+    fi
+
+    Info "Installing Node ..."
+
+    curl -sL https://raw.githubusercontent.com/nodesource/distributions/master/deb/setup_18.x | sudo bash -
+    sudo apt install nodejs -y
+
+    Success "Installed Node"
+}
+
+function UpdateNode()
+{
+    if [[ $(node -v | sed 's/[a-z-]//g' | cut -d'.' -f1) -gt 16 ]]; then
+        Success "Node update;$Check"
+        return
+    fi
+
+    Info "Upgradeing Node ..."
+
+    sudo apt-get -o Dpkg::Options::="--force-overwrite" install nodejs
+    sudo apt install nodejs -y
+
+    Success "Upgraded Node"
 }
 
 function InstallDocker()
@@ -691,13 +734,6 @@ function CloneInfra()
     fi
 }
 
-function PullImagesFromDisk()
-{
-    if [ -d /media/$USER/Repository/ ]; then
-        DockerPull
-    fi
-}
-
 function PullImages()
 {
     if ( docker image ls | grep api 1>/dev/null ); then
@@ -737,6 +773,8 @@ Divide
 InstallChrome
 InstallVsCode
 InstallGit
+# InstallNode
+# UpdateNode
 InstallDocker
 InstallDockerCompose
 InstallAzureDataStudio
@@ -773,46 +811,3 @@ ValidateGitHubAccessTokenFile
 Divide
 # Warning "IMPORTANT => RESTART YOUR SYSTEM"
 SetDockerPermissions
-
-function InstallNode()
-{
-    if ( which node 1>/dev/null ); then
-        Success "Node.js;$Check"
-        return
-    fi
-
-    Info "Installing Node ..."
-
-    curl -sL https://raw.githubusercontent.com/nodesource/distributions/master/deb/setup_18.x | sudo bash -
-    sudo apt install nodejs -y
-
-    Success "Installed Node"
-}
-
-function UpdateNode()
-{
-    if [[ $(node -v | sed 's/[a-z-]//g' | cut -d'.' -f1) -gt 16 ]]; then
-        Success "Node update;$Check"
-        return
-    fi
-
-    Info "Upgradeing Node ..."
-
-    sudo apt-get -o Dpkg::Options::="--force-overwrite" install nodejs
-    sudo apt install nodejs -y
-
-    Success "Upgraded Node"
-}
-
-function InstallV2Ray()
-{
-    sudo snap install v2ray-core
-    # go to https://github.com/Matsuridayo/nekoray/releases
-    # download nekoray-*****-linux64.zip
-    # Preferences => Basic settings => Security => Skip TLS => should be checked
-    # Preferences => Basic settings => Subscription => Ignore TLS => should be checked
-    # Preferences => Groups => New group => select subscription and enter link
-    # Update subscription
-    # Make sure VPN Mode is checked
-    # Connect
-}
