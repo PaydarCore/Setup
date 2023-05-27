@@ -541,41 +541,7 @@ function SetDockerPermissions()
 
 function DownloadVsCodeExtensions()
 {
-    if [ -f /PaydarCore/Extensions/CSharp.vsix ]; then
-        Success "CSharp extension;$Check"
-    else
-
-        Info "Downloading C# VS Code extension ... "
-
-        sudo mkdir -p /PaydarCore/Extensions
-
-        if [ -f /media/$USER/Repository/Files/CSharp.vsix ]; then
-            sudo cp /media/$USER/Repository/Files/CSharp.vsix /PaydarCore/Extensions
-        else
-            # wget http://dev.paydarsamane.com/CSharp.vsix -O /Temp/CSharp.vsix
-            # wget https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-dotnettools/vsextensions/csharp/1.25.2/vspackage?targetPlatform=linux-x64 -O /Temp/CSharp.vsix
-            wget https://holism.blob.core.windows.net/downloads/csharp.vsix -O CSharp.vsix
-            sudo mv /Temp/CSharp.vsix /PaydarCore/Extensions/CSharp.vsix
-        fi
-
-        Success "Downloaded C# VS Code extension "
-
-    fi
-
-    # if [ -f /PaydarCore/Extensions/Python.vsix ]; then
-    #     Success "Python extension;$Check"
-    # else
-
-    #     Info "Downloading Python VS Code extension ... "
-
-    #     sudo mkdir -p /PaydarCore/Extensions
-
-    #     wget https://holism.blob.core.windows.net/downloads/python.vsix -O Python.vsix
-    #     sudo mv Python.vsix /PaydarCore/Extensions/Python.vsix
-
-    #     Success "Downloaded Python VS Code extension "
-
-    # fi
+    Error DownloadVsCodeExtensions
 }
 
 function DownloadImageForStorage()
