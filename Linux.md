@@ -119,6 +119,7 @@
   - `Update`
 
 - In case of **tp-link**, https://github.com/nlkguy/archer-t2u-plus-linux
+  - Make sure that you enter the password on the second boot
   
 * Development
   - Clone PaydarCore
