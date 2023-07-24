@@ -743,7 +743,7 @@ InstallGit
 # UpdateNode
 InstallDocker
 InstallDockerCompose
-InstallAzureDataStudio
+# InstallAzureDataStudio
 InstallAnydesk
 InstallNginx
 InstallMkcert
