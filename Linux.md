@@ -120,6 +120,7 @@
 
 - In case of **tp-link**, https://github.com/nlkguy/archer-t2u-plus-linux
   - Make sure that you enter the password on the second boot
+  - If it stopped working, then use [this](https://github.com/morrownr/8821au-20210708)
   
 * Development
   - Clone PaydarCore
