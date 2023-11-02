@@ -491,19 +491,19 @@ function ClonePaydarCommands()
 
     if [ ! -d /PaydarCore/Setup/.git ]; then
         Info "Cloning Setup repository..."
-        git -C /PaydarCore clone git@github.com:PaydarCore/Setup
+        git -C /PaydarCore clone --depth 1 git@github.com:PaydarCore/Setup
         sudo chmod -R 777 /PaydarCore/Setup
         Success "Got Setup"
     fi
     if [ ! -d /PaydarCore/Commands/.git ]; then
     Info "Cloning Commands repository..."
-        git -C /PaydarCore clone git@github.com:PaydarCore/Commands
+        git -C /PaydarCore clone --depth 1 git@github.com:PaydarCore/Commands
         sudo chmod -R 777 /PaydarCore/Commands
         Success "Got Commands"
     fi
     if [ ! -d /PaydarCore/Scripts/.git ]; then
     Info "Cloning Scripts repository..."
-        git -C /PaydarCore clone git@github.com:PaydarCore/Scripts
+        git -C /PaydarCore clone --depth 1 git@github.com:PaydarCore/Scripts
         sudo chmod -R 777 /PaydarCore/Scripts
         Success "Got Scripts"
     fi
